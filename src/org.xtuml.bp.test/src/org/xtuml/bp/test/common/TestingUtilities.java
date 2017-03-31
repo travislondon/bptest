@@ -800,10 +800,7 @@ public class TestingUtilities {
 
 	public static void importDevelopmentProjectIntoWorkspace(
 			String developmentWorkspaceProject) {
-		String workspace_location = System.getenv("XTUML_DEVELOPMENT_REPOSITORY");
-		if(workspace_location == null || workspace_location.equals("")) {
-			workspace_location = BaseTest.DEFAULT_XTUML_DEVELOPMENT_REPOSITORY;
-		}
+		String workspace_location = "../../bridgepoint";
 		String pathToProject = workspace_location + "/src/" + developmentWorkspaceProject;
 		File file = new File(pathToProject);
 		if(!file.exists()) {
@@ -816,11 +813,7 @@ public class TestingUtilities {
 
 	public static void importTestingProjectIntoWorkspace(String testProject) {
 		String testProjectPath = "";
-		String repository_location = System.getenv("XTUML_TEST_MODEL_REPOSITORY");
-		if (repository_location == null || repository_location.equals("")) {
-			// use the default location
-			repository_location = BaseTest.DEFAULT_XTUML_TEST_MODEL_REPOSITORY;
-		}
+		String repository_location = System.getProperty("git_tree_dir");
 		if (testProject.equals("GPS Watch")) {
 			// GPS Watch is special. As of completion of DEI 7986, we have one 
 			// version that is used for testing and for distribution in the tool.
@@ -830,21 +823,6 @@ public class TestingUtilities {
 			testProjectPath = repository_location + "/" + testProject;
 		}
 		File file = new File(testProjectPath);
-		if(!file.exists()) {
-			// check the private repository
-			repository_location = System.getenv("XTUML_PRIVATE_MODEL_REPOSITORY");
-			if(repository_location == null || repository_location.equals("")) {
-				testProjectPath = BaseTest.DEFAULT_PRIVATE_MODEL_REPOSITORY
-						+ "/" + testProject;				
-			} else {
-				testProjectPath = repository_location + "/" + testProject;
-			}
-			file = new File(testProjectPath);
-			if(!file.exists()) {
-				Assert.fail("Could not locate test model at: " + testProjectPath);
-				return;
-			}
-		}
 		ProjectUtilities.importExistingProject(testProjectPath, true);
 		BaseTest.dispatchEvents(0);
 	}

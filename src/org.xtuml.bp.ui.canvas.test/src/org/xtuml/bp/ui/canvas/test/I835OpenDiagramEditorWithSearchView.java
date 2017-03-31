@@ -56,7 +56,7 @@ public class I835OpenDiagramEditorWithSearchView extends BaseTest {
         super.setUp();
 				
 		TestingUtilities.importModelUsingWizard(m_sys, new Path(
-				m_workspace_path + "../org.xtuml.bp.welcome/models"),
+				m_workspace_path + "../../bridgepoint/src/org.xtuml.bp.welcome/models"),
 				"xtUML_Metamodel.xtuml", false);
 		modelRoot = Ooaofooa.getInstance(Ooaofooa.createModelRootId(m_sys.getName(), "ooaofooa", true));
 	}
