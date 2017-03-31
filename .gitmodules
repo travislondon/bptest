@@ -1,0 +1,3 @@
+[submodule "bridgepoint"]
+	path = bridgepoint
+	url = https://github.com/travislondon/bridgepoint
