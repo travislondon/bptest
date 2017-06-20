@@ -31,7 +31,7 @@
 		openTestPKGDiagram("${ss.Name}");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot, "${class.Name}");
   .end if
-  		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+  		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
   		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
         Connector_c con = Connector_c.getOneGD_CONOnR20(
             Graphedge_c.getOneDIM_EDOnR320(
@@ -163,7 +163,7 @@
 		ModelClass_c mc = getModelClass("${class.Name}");
   		Association_c assoc = Association_c.getOneR_RELOnR201(mc, new getAssocByDescrip(""));
   .end if
-  		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+  		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
   		Cl_c.Clearselection();	
   .if ( is_special )
     .if (ss.Name == "FSS Tests")
@@ -257,7 +257,7 @@ import org.xtuml.bp.ui.canvas.GraphicalElement_c;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 @RunWith(OrderedRunner.class)
@@ -507,7 +507,7 @@ ${ft.body}\
 				ModelClass_c mc = getModelClass("${class.Name}");
   		Association_c assoc = Association_c.getOneR_RELOnR201(mc, new getAssocByDescrip(""));
   .end if
-  		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+  		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
   		Cl_c.Clearselection();	
       	selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -587,7 +587,7 @@ ${ft.body}\
                         return selected.getName().equals("R1");
                     }
                 });
-        GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+        GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
         Cl_c.Clearselection();
         selection.addToSelection(assoc);
         UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -616,7 +616,7 @@ ${ft.body}\
                         return selected.getName().equals("R4");
                     }
                 });
-        ce = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+        ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
         Cl_c.Clearselection();
         selection.addToSelection(assoc);
         UnformalizeOnR_RELAction ufa2 = new UnformalizeOnR_RELAction();

@@ -37,11 +37,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xtuml.bp.core.Package_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class I2053F2RenameTest extends BaseTest {
@@ -75,9 +75,9 @@ public class I2053F2RenameTest extends BaseTest {
 		CanvasTestUtilities.openDiagramEditor(dom);
 		
 		// get the CanvasEditor instance
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		
 		// locate External Entity Package
 		Package_c eePkg = Package_c.PackageInstance(modelRoot, new ClassQueryInterface_c() { 

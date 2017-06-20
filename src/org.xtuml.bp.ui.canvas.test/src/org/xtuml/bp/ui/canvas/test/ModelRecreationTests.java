@@ -39,6 +39,7 @@ import org.xtuml.bp.core.common.ModelElement;
 import org.xtuml.bp.core.common.ModelStreamProcessor;
 import org.xtuml.bp.core.common.Transaction;
 import org.xtuml.bp.core.common.TransactionManager;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.CompareTestUtilities;
@@ -47,7 +48,6 @@ import org.xtuml.bp.ui.canvas.Ooaofgraphics;
 import org.xtuml.bp.ui.graphics.actions.CanvasCopyAction;
 import org.xtuml.bp.ui.graphics.actions.CanvasPasteAction;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 import org.xtuml.bp.utilities.ui.ProjectUtilities;
 
@@ -209,17 +209,17 @@ public class ModelRecreationTests extends CanvasTest {
 		Package_c newPkg = Package_c.getOneEP_PKGOnR1401(destSys);
 		graphicsModelRoot = Ooaofgraphics.getInstance(newPkg.getModelRoot()
 				.getId());
-		GraphicalEditor original_ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor original_ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		// select everything for the copy
 		original_ce.getSelectAllAction().run();
 		// now copy the selection
 		copySelection(original_ce);
 		openCanvasEditor(newPkg);
-		GraphicalEditor new_ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor new_ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		ModelStreamProcessor.setParseDisabled(true);
 		pasteClipboardElements(new_ce);
 		ModelStreamProcessor.setParseDisabled(false);

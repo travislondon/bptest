@@ -38,6 +38,7 @@ import org.xtuml.bp.core.SystemModel_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.IdAssigner;
 import org.xtuml.bp.core.common.Transaction;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.io.mdl.ExportModel;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.CanvasTestUtils;
@@ -45,7 +46,6 @@ import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.test.common.UITestingUtilities;
 import org.xtuml.bp.ui.canvas.CanvasTransactionListener;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 @RunWith(OrderedRunner.class)
@@ -166,9 +166,9 @@ public class CanvasCreationTest extends CanvasTest {
 		Package_c fpk = Package_c.PackageInstance(modelRoot);
 		assertNotNull(fpk);
 		CanvasTestUtils.openCanvasEditor(fpk);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtils.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("Function Package");
 		assertNull(tool );
@@ -181,9 +181,9 @@ public class CanvasCreationTest extends CanvasTest {
 		Package_c dom = Package_c.PackageInstance(modelRoot);
 		assertNotNull(dom);
 		CanvasUtilities.openCanvasEditor(dom);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtilities.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("Activity Diagram");
 		assertNull(tool );
@@ -204,9 +204,9 @@ public class CanvasCreationTest extends CanvasTest {
 		Package_c pkg = CanvasTestUtils.createNewPackageInSystem(systemModel, "ActivityPackage");
 		assertNotNull(pkg);
 		CanvasUtilities.openCanvasEditor(pkg);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtilities.matchCanvasSpaceToModelSpace(ce.getModel());
 		
 		createConnector(new Point[] {new Point(120, 300), new Point(120, 500)}, "Activity Partition");

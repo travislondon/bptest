@@ -64,6 +64,7 @@ import org.xtuml.bp.core.common.BridgePointPreferencesStore;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.NonRootModelElement;
 import org.xtuml.bp.core.common.PersistableModelComponent;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.core.ui.preferences.BridgePointProjectPreferences;
 import org.xtuml.bp.core.ui.preferences.BridgePointProjectReferencesPreferences;
@@ -81,7 +82,6 @@ import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTestUtilities;
 import org.xtuml.bp.ui.explorer.MultipleOccurrenceElement;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 /**
@@ -340,9 +340,9 @@ import org.xtuml.bp.utilities.ui.CanvasUtilities;
         } );
         CanvasTestUtils.openPackageCanvasEditor(odmspkg);
         
-    	GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+    	GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
     	
     	// get the center point of the robot class
     	Shape_c shape = CanvasTestUtilities.getModelClassShape(modelRoot, "Robot");
@@ -396,9 +396,9 @@ import org.xtuml.bp.utilities.ui.CanvasUtilities;
         } );
         CanvasTestUtils.openPackageCanvasEditor(odmspkg);
     	
-    	GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+    	GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
     	
     	// get the center point of the robot class
     	Shape_c shape = CanvasTestUtilities.getModelClassShape(modelRoot, "Robot");

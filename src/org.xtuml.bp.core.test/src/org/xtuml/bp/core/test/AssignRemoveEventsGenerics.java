@@ -38,6 +38,7 @@ import org.xtuml.bp.core.StateMachineEvent_c;
 import org.xtuml.bp.core.StateMachineState_c;
 import org.xtuml.bp.core.StateMachine_c;
 import org.xtuml.bp.core.Transition_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.DeleteAction;
 import org.xtuml.bp.core.ui.GenericPackageAssignEventOnSM_TXNAction;
 import org.xtuml.bp.core.ui.GenericPackageAssignEventOnSM_TXNWizardPage1;
@@ -54,7 +55,6 @@ import org.xtuml.bp.ui.canvas.GraphicalElement_c;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class AssignRemoveEventsGenerics extends CanvasTest {
@@ -160,9 +160,9 @@ public class AssignRemoveEventsGenerics extends CanvasTest {
 	public void testAssignEventToTransition() {
 		test_id = "1";
 		openISC();
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		Shape_c shp = CanvasTestUtils.getModelStateShape(modelRoot,
 				"Test State 1");
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
@@ -228,9 +228,9 @@ public class AssignRemoveEventsGenerics extends CanvasTest {
 	public void testRemoveEventFromTransition() {
 		test_id = "2";
 		openISC();
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		Shape_c shp = CanvasTestUtils.getModelStateShape(modelRoot,
 				"Test State 3");
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
@@ -262,9 +262,9 @@ public class AssignRemoveEventsGenerics extends CanvasTest {
 		//		_R The label is changed to the correct value
 		test_id = "3";
 		openISC();
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		Shape_c shp = CanvasTestUtils.getModelStateShape(modelRoot,
 				"Test State 9");
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
@@ -329,9 +329,9 @@ public class AssignRemoveEventsGenerics extends CanvasTest {
 	public void testReplaceEventOnTransition() {
 		test_id = "6";
 		openISC();
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		Shape_c shp = CanvasTestUtils.getModelStateShape(modelRoot,
 				"Test State 1");
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);

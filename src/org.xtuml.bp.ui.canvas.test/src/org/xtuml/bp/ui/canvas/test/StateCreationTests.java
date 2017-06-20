@@ -24,12 +24,12 @@ import org.xtuml.bp.core.InstanceStateMachine_c;
 import org.xtuml.bp.core.Ooaofooa;
 import org.xtuml.bp.core.StateMachineState_c;
 import org.xtuml.bp.core.StateMachine_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.common.CanvasTestUtils;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.test.common.UITestingUtilities;
 import org.xtuml.bp.ui.canvas.CanvasTransactionListener;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class StateCreationTests extends CanvasTest {
@@ -93,9 +93,9 @@ public class StateCreationTests extends CanvasTest {
 		InstanceStateMachine_c ism = InstanceStateMachine_c.InstanceStateMachineInstance(modelRoot);
 		assertNotNull(ism);
 		CanvasTestUtils.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		AbstractTool tool = UITestingUtilities.getTool("State");
 		UITestingUtilities.activateTool(tool);
 		
@@ -120,9 +120,9 @@ public class StateCreationTests extends CanvasTest {
 		ClassStateMachine_c csm = ClassStateMachine_c.ClassStateMachineInstance(modelRoot);
 		assertNotNull(csm);
 		CanvasTestUtils.openCanvasEditor(csm);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtils.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("State");
 		UITestingUtilities.activateTool(tool);

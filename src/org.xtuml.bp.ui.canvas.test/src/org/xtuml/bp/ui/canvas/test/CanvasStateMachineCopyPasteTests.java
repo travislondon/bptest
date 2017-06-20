@@ -59,6 +59,7 @@ import org.xtuml.bp.core.SystemModel_c;
 import org.xtuml.bp.core.Transition_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.NonRootModelElement;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.test.TestUtil;
 import org.xtuml.bp.test.common.BaseTest;
@@ -67,7 +68,6 @@ import org.xtuml.bp.test.common.TestingUtilities;
 import org.xtuml.bp.test.common.UITestingUtilities;
 import org.xtuml.bp.ui.canvas.Ooaofgraphics;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 import org.xtuml.bp.utilities.ui.ProjectUtilities;
 
@@ -128,9 +128,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 				});
 		assertNotNull(testState);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.copyElement(testState, ce);
 		UITestingUtilities.pasteClipboardContents(new Point(700, 100), ce);
 		validateOrGenerateResults(ce, generateResults);
@@ -168,18 +168,19 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 				.getOneSM_CRTXNOnR507(Transition_c.getOneSM_TXNOnR505(machine));
 		assertNotNull(creationTran);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState);
 		elements.add(creationTran);
 		UITestingUtilities.copyElements(elements, ce);
 		ClassStateMachine_c asm = ClassStateMachine_c.getOneSM_ASMOnR519(clazz);
 		CanvasUtilities.openCanvasEditor(asm);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
+
 		assertTrue(
 				"Paste of creation transition in class-based state machine is allowed.",
 				UITestingUtilities.checkItemStatusInContextMenu(ce.getCanvas()
@@ -227,9 +228,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 				.getOneSM_CRTXNOnR507(Transition_c.getOneSM_TXNOnR505(machine));
 		assertNotNull(creationTran);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState);
 		elements.add(creationTran);
@@ -303,18 +304,18 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull(testState2);
 		Transition_c transition = Transition_c.getOneSM_TXNOnR506(testState2);
 		CanvasUtilities.openCanvasEditor(superIsm);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState1);
 		elements.add(testState2);
 		elements.add(transition);
 		UITestingUtilities.copyElements(elements, ce);
 		CanvasUtilities.openCanvasEditor(destIsm);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.pasteClipboardContents(new Point(100, 100), ce);
 		validateOrGenerateResults(ce, generateResults);
 		StateMachineEvent_c[] after_evts = StateMachineEvent_c
@@ -379,18 +380,18 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull(testState2);
 		Transition_c transition = Transition_c.getOneSM_TXNOnR506(testState2);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState1);
 		elements.add(testState2);
 		elements.add(transition);
 		UITestingUtilities.copyElements(elements, ce);
 		CanvasUtilities.openCanvasEditor(asm);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.pasteClipboardContents(new Point(100, 100), ce);
 		validateOrGenerateResults(ce, generateResults);
 		StateMachineEvent_c[] after_evts = StateMachineEvent_c
@@ -460,18 +461,18 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull(testState2);
 		Transition_c transition = Transition_c.getOneSM_TXNOnR506(testState2);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState1);
 		elements.add(testState2);
 		elements.add(transition);
 		UITestingUtilities.copyElements(elements, ce);
 		CanvasUtilities.openCanvasEditor(destIsm);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.pasteClipboardContents(new Point(100, 100), ce);
 		validateOrGenerateResults(ce, generateResults);
 		StateMachineEvent_c[] after_evts = StateMachineEvent_c
@@ -545,18 +546,18 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull(testState2);
 		Transition_c transition = Transition_c.getOneSM_TXNOnR506(testState2);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState1);
 		elements.add(testState2);
 		elements.add(transition);
 		UITestingUtilities.copyElements(elements, ce);
 		CanvasUtilities.openCanvasEditor(destIsm);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		TestUtil.selectButtonInDialog(1000, "Proceed");
 		UITestingUtilities.pasteClipboardContents(new Point(100, 100), ce);
 		assertTrue("The event name was not listed in the warning dialog.",
@@ -629,18 +630,18 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull(testState2);
 		Transition_c transition = Transition_c.getOneSM_TXNOnR506(testState2);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState1);
 		elements.add(testState2);
 		elements.add(transition);
 		UITestingUtilities.copyElements(elements, ce);
 		CanvasUtilities.openCanvasEditor(destIsm);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		TestUtil.selectButtonInDialog(500, "Proceed");
 		Point clearPoint = UITestingUtilities.getClearPoint(ce);
 		UITestingUtilities.pasteClipboardContents(clearPoint, ce);
@@ -692,9 +693,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull(testState2);
 		Transition_c transition = Transition_c.getOneSM_TXNOnR506(testState2);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState1);
 		elements.add(testState2);
@@ -752,18 +753,18 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull(testState2);
 		Transition_c transition = Transition_c.getOneSM_TXNOnR506(testState2);
 		CanvasUtilities.openCanvasEditor(ism);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(testState1);
 		elements.add(testState2);
 		elements.add(transition);
 		UITestingUtilities.copyElements(elements, ce);
 		CanvasUtilities.openCanvasEditor(destIsm);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		TestUtil.selectButtonInDialog(500, "Undo");
 		UITestingUtilities.pasteClipboardContents(UITestingUtilities
 				.getClearPoint(ce), ce);
@@ -791,9 +792,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		Package_c ss = Package_c.PackageInstance(modelRoot,
 				new Package_by_name_c("Subsystem"));
 		CanvasUtilities.openCanvasEditor(ss);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.copyElement(clazz, ce);
 		TestUtil.selectButtonInDialog(500, "Proceed");
 		UITestingUtilities.pasteClipboardContents(UITestingUtilities
@@ -805,9 +806,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull("Class was not pasted after proceed was selected.",
 				newClass);
 		CanvasUtilities.openCanvasEditor(ism);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		assertTrue("The event name was not listed in the warning dialog.",
 				TestUtil.dialogText.indexOf("KEY3: Polymorphic Event 1") != -1);
 		NonLocalEvent_c[] nlevts = NonLocalEvent_c
@@ -837,9 +838,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		Package_c ss = Package_c.PackageInstance(modelRoot,
 				new Package_by_name_c("Subsystem"));
 		CanvasUtilities.openCanvasEditor(ss);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(subClass);
 		elements.add(superClass);
@@ -854,9 +855,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		assertNotNull("Class was not pasted after proceed was selected.",
 				newClass);
 		CanvasUtilities.openCanvasEditor(ism);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		assertTrue("The event name was not listed in the warning dialog.",
 				TestUtil.dialogText.indexOf("KEY3: Polymorphic Event 1") != -1);
 		NonLocalEvent_c[] nlevts = NonLocalEvent_c
@@ -893,9 +894,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 				.getOneR_RELOnR206(SubtypeSupertypeAssociation_c
 						.getOneR_SUBSUPOnR213(subtypeLine));
 		CanvasUtilities.openCanvasEditor(ss);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		List<NonRootModelElement> elements = new ArrayList<NonRootModelElement>();
 		elements.add(subClass);
 		elements.add(superClass);
@@ -908,9 +909,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		InstanceStateMachine_c ism = InstanceStateMachine_c
 				.getOneSM_ISMOnR518(newClass);
 		CanvasUtilities.openCanvasEditor(ism);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		NonLocalEvent_c[] nlevts = NonLocalEvent_c
 				.getManySM_NLEVTsOnR526(SemEvent_c
 						.getManySM_SEVTsOnR525(StateMachineEvent_c
@@ -935,9 +936,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		Package_c ss = Package_c.PackageInstance(modelRoot,
 				new Package_by_name_c("Subsystem"));
 		CanvasUtilities.openCanvasEditor(dom);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.copyElement(ss, ce);
 		UITestingUtilities.pasteClipboardContents(new Point(700, 400), ce);
 		Package_c newSS = Package_c.PackageInstance(modelRoot,
@@ -947,9 +948,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		InstanceStateMachine_c ism = InstanceStateMachine_c
 				.getOneSM_ISMOnR518(newClass);
 		CanvasUtilities.openCanvasEditor(ism);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		NonLocalEvent_c[] nlevts = NonLocalEvent_c
 				.getManySM_NLEVTsOnR526(SemEvent_c
 						.getManySM_SEVTsOnR525(StateMachineEvent_c
@@ -975,9 +976,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		Package_c ss = Package_c.PackageInstance(modelRoot,
 				new Package_by_name_c("Subsystem"));
 		CanvasUtilities.openCanvasEditor(dom);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.copyElement(ss, ce);
 		ProjectUtilities.createProject("temp_destination");
 		SystemModel_c newSys = getSystemModel("temp_destination");
@@ -985,9 +986,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		Package_c dest = Package_c.getOneEP_PKGOnR1401(newSys);
 		assertNotNull(dest);
 		CanvasUtilities.openCanvasEditor(dest);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		TestUtil.selectButtonInDialog(500, "Undo");
 		UITestingUtilities.pasteClipboardContents(new Point(700, 400), ce);
 		graphicsModelRoot = Ooaofgraphics.getInstance(dest.getModelRoot()
@@ -1121,9 +1122,9 @@ public class CanvasStateMachineCopyPasteTests extends CanvasTest {
 		GraphicalEditor destinationEditor = UITestingUtilities
 				.getGraphicalEditorFor(machine, true, true);
 		
-		destinationEditor = ((ModelEditor) PlatformUI.getWorkbench()
+		destinationEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		if(!resolvable) {
 			TestUtil.selectButtonInDialog(4000, "Proceed");
 		}

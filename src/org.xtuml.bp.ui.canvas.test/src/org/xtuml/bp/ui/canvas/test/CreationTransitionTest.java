@@ -10,13 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xtuml.bp.core.InstanceStateMachine_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.CanvasTestUtils;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.test.common.UITestingUtilities;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class CreationTransitionTest extends CanvasTest {
@@ -85,9 +85,9 @@ public class CreationTransitionTest extends CanvasTest {
 	public void testDrawCreationTransition() {
   		test_id = "test_1";
   		openTestSMDiagram("TestState1");
-  		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+  		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
   		Shape_c shp = CanvasTestUtils.getModelStateShape(modelRoot, "TestState1");
   		AbstractTool tool = UITestingUtilities.getTool("Creation Transition");
   		UITestingUtilities.activateTool(tool);

@@ -22,13 +22,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xtuml.bp.core.Package_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.CanvasTestUtils;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.ui.canvas.Graphnode_c;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 /**
  * Contains various tests involving the resizing of shapes on diagrams.
@@ -68,9 +68,9 @@ public class ShapeResizeTest2 extends BaseTest
         assertNotNull(ss);
         CanvasTestUtils.openCanvasEditor(ss);
 
-        GraphicalEditor editor = ((ModelEditor) PlatformUI.getWorkbench()
+        GraphicalEditor editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
                 .getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-                .getGraphicalEditor();
+                .getActivePart();
         
         editor.zoomAll();
         
@@ -145,9 +145,9 @@ public class ShapeResizeTest2 extends BaseTest
         assertNotNull(ss);
         CanvasTestUtils.openCanvasEditor(ss);
 
-        GraphicalEditor editor = ((ModelEditor) PlatformUI.getWorkbench()
+        GraphicalEditor editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
                 .getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-                .getGraphicalEditor();
+                .getActivePart();
         editor.zoomAll();
         
         Shape_c shape = CanvasTestUtils.getModelClassShape(modelRoot, "Disk");

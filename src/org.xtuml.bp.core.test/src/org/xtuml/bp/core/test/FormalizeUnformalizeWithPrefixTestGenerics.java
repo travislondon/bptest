@@ -22,8 +22,6 @@
 //
 package org.xtuml.bp.core.test;
 
-import java.util.UUID;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.IWizard;
@@ -39,19 +37,17 @@ import org.xtuml.bp.core.AttributeReferenceInClass_c;
 import org.xtuml.bp.core.Attribute_c;
 import org.xtuml.bp.core.ClassAsLink_c;
 import org.xtuml.bp.core.ClassAsSimpleFormalizer_c;
-import org.xtuml.bp.core.ClassIdentifier_c;
 import org.xtuml.bp.core.ClassInAssociation_c;
 import org.xtuml.bp.core.ImportedClass_c;
 import org.xtuml.bp.core.LinkedAssociation_c;
 import org.xtuml.bp.core.ModelClass_c;
-import org.xtuml.bp.core.Ooaofooa;
 import org.xtuml.bp.core.Package_c;
 import org.xtuml.bp.core.PackageableElement_c;
 import org.xtuml.bp.core.ReferentialAttribute_c;
-import org.xtuml.bp.core.ReferredToClassInAssoc_c;
 import org.xtuml.bp.core.ReferringClassInAssoc_c;
 import org.xtuml.bp.core.SimpleAssociation_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.BinaryFormalizeOnR_RELAction;
 import org.xtuml.bp.core.ui.BinaryFormalizeOnR_RELWizard;
 import org.xtuml.bp.core.ui.BinaryFormalizeOnR_RELWizardPage1;
@@ -76,7 +72,6 @@ import org.xtuml.bp.ui.canvas.GraphicalElement_c;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
@@ -448,9 +443,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FSA Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeSimpleAssoc OBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -504,9 +499,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FSA Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeSimpleAssoc OBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -560,9 +555,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FSA Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeSimpleAssocReflexive OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -615,9 +610,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix1 = "pre1";
 		openTestPKGDiagram("FSA Tests");
 		Shape_c shp = getModelIClassShape("FormalizeSimpleAssoc IOBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -670,9 +665,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix1 = "pre1";
 		openTestPKGDiagram("FSA Tests");
 		Shape_c shp = getModelIClassShape("FormalizeSimpleAssoc IOBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -725,9 +720,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix1 = "pre1";
 		openTestPKGDiagram("FSA Tests");
 		Shape_c shp = getModelIClassShape("FormalizeSimpleAssocReflexive IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -782,9 +777,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -847,9 +842,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -912,9 +907,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -976,9 +971,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1040,9 +1035,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1104,9 +1099,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1168,9 +1163,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1230,9 +1225,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1292,9 +1287,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1354,9 +1349,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1415,9 +1410,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1478,9 +1473,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1541,9 +1536,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1604,9 +1599,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1667,9 +1662,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1730,9 +1725,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1793,9 +1788,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1854,9 +1849,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1915,9 +1910,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -1976,9 +1971,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2037,9 +2032,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeSimpleAssoc OBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2057,9 +2052,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeSimpleAssoc OBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2077,9 +2072,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeSimpleAssocReflexive OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2097,9 +2092,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeSimpleAssoc IOBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2117,9 +2112,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeSimpleAssoc IOBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2137,9 +2132,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeSimpleAssocReflexive IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2157,9 +2152,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR OBJ_OBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2177,9 +2172,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR OBJ_IOBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2197,9 +2192,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR OBJ_IOBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2217,9 +2212,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive OBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2237,9 +2232,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive OBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2257,9 +2252,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR IOBJ_OBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2277,9 +2272,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR IOBJ_OBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2297,9 +2292,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR IOBJ_IOBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2317,9 +2312,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive IOBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2337,9 +2332,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive IOBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -2358,9 +2353,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2421,9 +2416,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2484,9 +2479,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2547,9 +2542,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2610,9 +2605,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2673,9 +2668,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSR OBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2736,9 +2731,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2797,9 +2792,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2858,9 +2853,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2919,9 +2914,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = CanvasTestUtils.getModelClassShape(modelRoot,
 				"FormalizeASSRReflexive OBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -2979,9 +2974,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3041,9 +3036,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3103,9 +3098,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3165,9 +3160,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_OBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3227,9 +3222,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3289,9 +3284,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSR IOBJ_IOBJ IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3351,9 +3346,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3411,9 +3406,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_OBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3471,9 +3466,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3531,9 +3526,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		String prefix2 = "pre2";
 		openTestPKGDiagram("FAL Tests");
 		Shape_c shp = getModelIClassShape("FormalizeASSRReflexive IOBJ_IOBJ");
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);
 		Connector_c con = Connector_c.getOneGD_CONOnR20(Graphedge_c
 				.getOneDIM_EDOnR320(Graphconnector_c
@@ -3593,9 +3588,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR OBJ_OBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3618,9 +3613,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR OBJ_IOBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3643,9 +3638,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR OBJ_IOBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3668,9 +3663,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive OBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3693,9 +3688,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive OBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3718,9 +3713,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR IOBJ_OBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3743,9 +3738,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR IOBJ_OBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3768,9 +3763,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSR IOBJ_IOBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3793,9 +3788,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive IOBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3818,9 +3813,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("FormalizeASSRReflexive IOBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		ClassAsLink_c link = ClassAsLink_c
 				.getOneR_ASSROnR211(LinkedAssociation_c
@@ -3841,9 +3836,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSimpleAssocUsedRef OBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -3861,9 +3856,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSimpleAssocUsedRef OBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -3881,9 +3876,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSimpleAssocReflexiveUsedRef OBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -3902,9 +3897,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSimpleAssocUsedRef IOBJ_OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -3923,9 +3918,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSimpleAssocUsedRef IOBJ_IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -3944,9 +3939,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSimpleAssocReflexiveUsedRef IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -3964,9 +3959,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSR OBJ_OBJ OBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -3984,9 +3979,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSR OBJ_OBJ IOBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4004,9 +3999,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSR OBJ_IOBJ IOBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4024,9 +4019,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSRReflexive OBJ_OBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4044,9 +4039,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSRReflexive OBJ_IOBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4065,9 +4060,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSR IOBJ_OBJ OBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4086,9 +4081,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSR IOBJ_IOBJ OBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4107,9 +4102,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSR IOBJ_IOBJ IOBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4128,9 +4123,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSRReflexive IOBJ_OBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4149,9 +4144,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeASSRReflexive IOBJ_IOBJ UsedRef");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4169,9 +4164,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSUBSUPUsedRef OBJ_OBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4189,9 +4184,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSUBSUPUsedRef OBJ_IOBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4209,9 +4204,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSUBSUPUsedRef OBJ_IOBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4230,9 +4225,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSUBSUPUsedRef IOBJ_OBJ OBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4251,9 +4246,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSUBSUPUsedRef IOBJ_OBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();
@@ -4272,9 +4267,9 @@ public class FormalizeUnformalizeWithPrefixTestGenerics extends CanvasTest {
 		ModelClass_c mc = getModelClass("UnformalizeSUBSUPUsedRef IOBJ_IOBJ IOBJ");
 		Association_c assoc = Association_c.getOneR_RELOnR201(mc,
 				new getAssocByDescrip(""));
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();;
 		Cl_c.Clearselection();
 		selection.addToSelection(assoc);
 		UnformalizeOnR_RELAction ufa = new UnformalizeOnR_RELAction();

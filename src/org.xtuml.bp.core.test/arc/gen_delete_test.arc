@@ -214,7 +214,7 @@
   		openTestPKGDiagram("${ss}");
   	  .end if
     .end if
-  		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+  		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
       .if (objtype == "IOBJ")
   		Shape_c shp = getModelIClassShape("${test_name}");
   	  .elif (objtype == "OBJ")
@@ -308,7 +308,7 @@ import org.xtuml.bp.ui.canvas.GraphicalElement_c;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
+import org.xtuml.bp.core.editors.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class DeleteTestGenerics extends CanvasTest {

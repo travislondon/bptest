@@ -48,6 +48,7 @@ import org.xtuml.bp.core.StateMachineState_c;
 import org.xtuml.bp.core.StateMachine_c; //import org.xtuml.bp.core.Subsystem_c;
 import org.xtuml.bp.core.Transition_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.GenericPackageAssignEventOnSM_CRTXNAction;
 import org.xtuml.bp.core.ui.GenericPackageAssignEventOnSM_CRTXNWizardPage1;
 import org.xtuml.bp.core.ui.GenericPackageAssignEventOnSM_TXNAction;
@@ -74,7 +75,6 @@ import org.xtuml.bp.ui.canvas.Graphelement_c;
 import org.xtuml.bp.ui.canvas.GraphicalElement_c;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 /**
@@ -699,9 +699,9 @@ public class PolymorphicEventAssignmentTestGenerics extends BaseTest {
 
 		
 		
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		Shape_c shp = CanvasTestUtils.getModelStateShape(modelRoot,
 				"Sub_StateOne");
 		GraphicalElement_c ge = GraphicalElement_c.getOneGD_GEOnR2(shp);

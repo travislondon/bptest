@@ -47,6 +47,7 @@ import org.xtuml.bp.core.Package_c;
 import org.xtuml.bp.core.StateMachineState_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.NonRootModelElement;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.RenameAction;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.core.ui.perspective.BridgePointPerspective;
@@ -67,7 +68,6 @@ import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.Waypoint_c;
 import org.xtuml.bp.ui.explorer.ExplorerView;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 import junit.framework.TestCase;
@@ -107,7 +107,7 @@ static public GraphicalEditor getCanvasEditor(String title) {
 				if (editors[k].getPartName().equals(title)) {
 					IEditorPart editor = editors[k].getEditor(false);
 					if(editor instanceof ModelEditor) {
-						return ((ModelEditor) editor).getGraphicalEditor();
+						return (GraphicalEditor) ((ModelEditor) editor).getActivePart();
 					} else
 						return null;
 				}
@@ -149,9 +149,9 @@ public class findModelEEByName implements ClassQueryInterface_c {
 }
 
 public static void createKeyEvent(char key) {
-	GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+	GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 	Event ke = new Event();
 	ke.character = key;
 	ce.getCanvas().notifyListeners(SWT.KeyDown, ke);
@@ -209,9 +209,9 @@ public static void updateTreeItem(Object t1, String newValue ) throws Exception
 }
 
 public static SelectionTool_c getSelectionTool (Ooaofgraphics graphicsModelRoot, String toolName) {
-	GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+	GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 	Model_c mdl = ce.getModel();
 	ModelTool_c mt = null;
 	SelectionTool_c selTool = null;

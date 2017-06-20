@@ -26,11 +26,11 @@ import org.xtuml.bp.core.ModelClass_c;
 import org.xtuml.bp.core.Ooaofooa;
 import org.xtuml.bp.core.Package_c;
 import org.xtuml.bp.core.UserDataType_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.common.CanvasTestUtils;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.test.common.UITestingUtilities;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class CanvasCreationTest2 extends CanvasTest {
@@ -84,9 +84,9 @@ public class CanvasCreationTest2 extends CanvasTest {
 		Package_c ss = Package_c.PackageInstance(modelRoot);
 		assertNotNull(ss);
 		CanvasTestUtils.openCanvasEditor(ss);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtils.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("Class");
 		UITestingUtilities.activateTool(tool);
@@ -111,9 +111,9 @@ public class CanvasCreationTest2 extends CanvasTest {
 		Package_c ss = Package_c.PackageInstance(modelRoot);
 		assertNotNull(ss);
 		CanvasTestUtils.openCanvasEditor(ss);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtils.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("Imported Class");
 		UITestingUtilities.activateTool(tool);
@@ -141,9 +141,9 @@ public class CanvasCreationTest2 extends CanvasTest {
 		Package_c dpk = dpks[1];
 		assertNotNull(dpk);
 		CanvasTestUtils.openCanvasEditor(dpk);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtils.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("User Data Type");
 		UITestingUtilities.activateTool(tool);
@@ -172,9 +172,9 @@ public class CanvasCreationTest2 extends CanvasTest {
 		Package_c dpk = dpks[1];
 		assertNotNull(dpk);
 		CanvasTestUtils.openCanvasEditor(dpk);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtils.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("Enumeration Data Type");
 		UITestingUtilities.activateTool(tool);
@@ -200,9 +200,9 @@ public class CanvasCreationTest2 extends CanvasTest {
 		Package_c epk = Package_c.PackageInstance(modelRoot);
 		assertNotNull(epk);
 		CanvasTestUtils.openCanvasEditor(epk);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		CanvasTestUtils.matchCanvasSpaceToModelSpace(ce.getModel());
 		AbstractTool tool = UITestingUtilities.getTool("External Entity");
 		UITestingUtilities.activateTool(tool);

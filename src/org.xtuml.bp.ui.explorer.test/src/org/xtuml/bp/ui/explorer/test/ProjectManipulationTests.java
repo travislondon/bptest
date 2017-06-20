@@ -33,12 +33,12 @@ import org.xtuml.bp.core.common.BridgePointPreferencesStore;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.PersistableModelComponent;
 import org.xtuml.bp.core.common.TransactionManager;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.TestUtil;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.ExplorerUtil;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 /**
  * Performs tests of model-explorer functionality.
@@ -183,7 +183,7 @@ import org.xtuml.bp.ui.graphics.editor.ModelEditor;
         
         // open a package editor on the test package
         selectPackageItemInModelExplorer(1);
-        GraphicalEditor editor = ((ModelEditor) ExplorerUtil.openEditor()).getGraphicalEditor();
+        GraphicalEditor editor = (GraphicalEditor) ((ModelEditor) ExplorerUtil.openEditor()).getActivePart();
 
         TestUtil.closeProject(getProject());
         BaseTest.dispatchEvents(0);
@@ -212,7 +212,7 @@ import org.xtuml.bp.ui.graphics.editor.ModelEditor;
         
         // open a package editor on the test package
         selectPackageItemInModelExplorer(1);
-        GraphicalEditor editor = ((ModelEditor) ExplorerUtil.openEditor()).getGraphicalEditor();
+        GraphicalEditor editor = (GraphicalEditor) ((ModelEditor) ExplorerUtil.openEditor()).getActivePart();
         
         TestUtil.deleteProject(getProject());
         BaseTest.dispatchEvents(0);
@@ -304,7 +304,7 @@ import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
         // open a package editor on the test package
         selectPackageItemInModelExplorer(1);
-        GraphicalEditor editor = ((ModelEditor) ExplorerUtil.openEditor()).getGraphicalEditor();
+        GraphicalEditor editor = (GraphicalEditor) ((ModelEditor) ExplorerUtil.openEditor()).getActivePart();
 
         // delete the domain's folder
         // we need to removeFirstSegments(1) because the project supplies the top-level directory

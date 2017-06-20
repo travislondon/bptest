@@ -42,6 +42,7 @@ import org.xtuml.bp.core.NoEventTransition_c;
 import org.xtuml.bp.core.Ooaofooa;
 import org.xtuml.bp.core.TransitionActionHome_c;
 import org.xtuml.bp.core.Transition_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.util.OoaofgraphicsUtil;
 import org.xtuml.bp.core.util.WorkspaceUtil;
 import org.xtuml.bp.test.common.BaseTest;
@@ -52,7 +53,6 @@ import org.xtuml.bp.ui.canvas.Ooaofgraphics;
 import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 @RunWith(OrderedRunner.class)
@@ -155,9 +155,9 @@ public class TransitionActionTestGenerics extends CanvasTest {
 	}
 	public static void handleCreationTransitionTest(Object uut) {
 		try {
-	  		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+	  		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 					.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-					.getGraphicalEditor();
+					.getActivePart();
 	  		// give the diagram some time to layout figures
 	  		while(PlatformUI.getWorkbench().getDisplay().readAndDispatch());	  		
 	  		ce.zoomAll();
@@ -214,9 +214,9 @@ public class TransitionActionTestGenerics extends CanvasTest {
 	public static void handleTransitionTest(Object uut, String startState,
                                                               String endState) {
 		try {
-	  		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+	  		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 					.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-					.getGraphicalEditor();
+					.getActivePart();
 	  		while(PlatformUI.getWorkbench().getDisplay().readAndDispatch());
 	  		ce.zoomAll();
 	  		ce.zoomOut();

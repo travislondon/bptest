@@ -450,6 +450,7 @@ import org.junit.runner.RunWith;
 import org.xtuml.bp.core.*;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.ui.Selection;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.TestUtil;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.UITestingUtilities;
@@ -506,7 +507,7 @@ public class ContextMenuTestsGenerics extends BaseTest
             // open a class diagram editor on any subsystem
             Package_c uut = Package_c.PackageInstance(modelRoot,new Package_by_name_c("Test Subsystem"));
             CanvasTestUtils.openDiagramEditor(uut);
-            editor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+            editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
         }
     }
     
@@ -587,7 +588,7 @@ public class ContextMenuTestsGenerics extends BaseTest
 
     	boolean cme_label = false;
     	boolean found = false;
-    	GraphicalEditor editor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+    	GraphicalEditor editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 
     	PaletteRoot root = editor.getDomain().getPaletteViewer().getPaletteRoot();
     	List<?> children = root.getChildren();
@@ -824,7 +825,7 @@ ${result.body}
         
        Package_c uut = Package_c.PackageInstance(modelRoot , new Package_by_name_c("Formalize Menu Tests"));
         CanvasTestUtils.openDiagramEditor(uut);
-        editor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+        editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 
         // get the menu from the SWT Canvas
     	Menu menu = editor.getCanvas().getMenu();

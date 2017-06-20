@@ -57,6 +57,7 @@ import org.xtuml.bp.core.Provision_c;
 import org.xtuml.bp.core.SystemModel_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.Transaction;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.test.TestUtil;
 import org.xtuml.bp.test.common.ExplorerUtil;
@@ -68,7 +69,6 @@ import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.canvas.test.CanvasTestResult;
 import org.xtuml.bp.ui.canvas.test.CanvasTestUtilities;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.ui.properties.ChooserPropertyDescriptor;
 import org.xtuml.bp.ui.properties.OperationsC_IOPropertySource;
 import org.xtuml.bp.ui.properties.ParametersC_PPPropertySource;
@@ -181,7 +181,7 @@ public class TigerNatureExistingProjectsTestGenerics extends CanvasTest {
 
 		Object editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 				.getActivePage().openEditor(editorInput, id);
-		GraphicalEditor ce = ((ModelEditor) editor).getGraphicalEditor();
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) editor).getActivePart();
 
 		graphicsModelRoot = Ooaofgraphics.getInstance(ce.getModel()
 				.getModelRoot().getId());

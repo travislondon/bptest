@@ -65,6 +65,7 @@ import org.xtuml.bp.core.SystemModel_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.NonRootModelElement;
 import org.xtuml.bp.core.common.Transaction;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.RenameAction;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.ui.canvas.Cl_c;
@@ -83,7 +84,6 @@ import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.Waypoint_c;
 import org.xtuml.bp.ui.graphics.actions.OpenGraphicsEditor;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.ui.text.activity.ShowActivityAction;
 
 public class CanvasTestUtils {
@@ -169,7 +169,7 @@ static public GraphicalEditor getCanvasEditor(String title) {
 			IEditorReference[] editors = pages[j].getEditorReferences();
 			for (int k = editors.length-1; k >= 0; --k) {
 				if (editors[k].getPartName().equals(title)) {
-					return ((ModelEditor) editors[k].getEditor(false)).getGraphicalEditor();
+					return (GraphicalEditor) ((ModelEditor) editors[k].getEditor(false)).getActivePart();
 				}
 			}
 		}
@@ -210,9 +210,9 @@ public class findModelEEByName implements ClassQueryInterface_c {
 }
 
 public static void createKeyEvent(char key) {
-	GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+	GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 			.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-			.getGraphicalEditor();
+			.getActivePart();
 	Event ke = new Event();
 	ke.character = key;
 	ce.getCanvas().notifyListeners(SWT.KeyDown, ke);

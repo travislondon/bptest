@@ -47,6 +47,7 @@ import org.xtuml.bp.core.CorePlugin;
 import org.xtuml.bp.core.Ooaofooa;
 import org.xtuml.bp.core.common.BridgePointPreferencesStore;
 import org.xtuml.bp.core.common.NonRootModelElement;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.OrderedRunner;
@@ -58,7 +59,6 @@ import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.canvas.test.actions.OpenTestEditorAction;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.ui.graphics.parts.ConnectorEditPart;
 import org.xtuml.bp.ui.graphics.parts.DiagramEditPart;
 import org.xtuml.bp.ui.graphics.parts.ShapeEditPart;
@@ -114,9 +114,9 @@ public class RectilinearRoutingTests extends CanvasTest {
 		Selection.getInstance().addToSelection(m_sys);
 		OpenTestEditorAction action = new OpenTestEditorAction();
 		action.run(null);
-		fActiveEditor = ((ModelEditor) PlatformUI.getWorkbench()
+		fActiveEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.toggleZoom(
 						PlatformUI.getWorkbench().getActiveWorkbenchWindow()

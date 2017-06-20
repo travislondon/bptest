@@ -23,6 +23,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.test.common.UITestingUtilities;
@@ -31,7 +32,6 @@ import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.canvas.test.CanvasTestResult;
 import org.xtuml.bp.ui.canvas.test.CanvasTestUtilities;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class NewShapeAfterRestart extends CanvasTest {
@@ -92,7 +92,7 @@ public class NewShapeAfterRestart extends CanvasTest {
 
 		Object editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(editorInput,
 				id);
-		GraphicalEditor ce = ((ModelEditor) editor).getGraphicalEditor();
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) editor).getActivePart();
 
 		graphicsModelRoot = Ooaofgraphics.getInstance(ce.getModel().getModelRoot().getId());
 

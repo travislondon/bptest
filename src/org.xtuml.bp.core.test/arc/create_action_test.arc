@@ -1500,7 +1500,7 @@ import org.xtuml.bp.test.common.TestingUtilities;
 import org.xtuml.bp.test.common.UITestingUtilities;
 import org.xtuml.bp.ui.canvas.Model_c;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 import org.xtuml.bp.utilities.ui.ProjectUtilities;
 import org.xtuml.bp.core.util.OoaofgraphicsUtil;
@@ -1521,7 +1521,7 @@ public class ${classname} extends CoreTest
 		modelRoot.clearDatabase(new NullProgressMonitor());
 		m_sys = ProjectUtilities.getSystemModel(project);
 		CanvasTestUtils.openDiagramEditor(m_sys);
-		editor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 			
 	}
    	@After
@@ -1560,7 +1560,7 @@ public class ${classname} extends CoreTest
 	}
 	private ModelClass_c createModelClass(Package_c pkg) {
 		CanvasTestUtils.openCanvasEditor(pkg);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Classes", "Class");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1581,7 +1581,7 @@ public class ${classname} extends CoreTest
 	}
    private ExternalEntity_c createExternalEntity(Package_c pkg) {
 		CanvasTestUtils.openCanvasEditor(pkg);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("External", "External Entity");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1665,7 +1665,7 @@ ConstantSpecification_c createConstDataType(Package_c pkg)
 	}
 	private Interface_c createInterface(Package_c pkg) {
 		CanvasTestUtils.openCanvasEditor(pkg);
-		GraphicalEditor activeEditor =((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Components", "Interface");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1713,7 +1713,7 @@ ConstantSpecification_c createConstDataType(Package_c pkg)
  }
 	private SynchronousMessage_c createSyncMessage(Package_c pkg) {
 		CanvasTestUtils.openCanvasEditor(pkg);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Interaction", "Synchronous Message");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1739,7 +1739,7 @@ ConstantSpecification_c createConstDataType(Package_c pkg)
 	}
 	private AsynchronousMessage_c createASyncMessage(Package_c pkg) {
 		CanvasTestUtils.openCanvasEditor(pkg);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Interaction", "Asynchronous Message");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1766,7 +1766,7 @@ ConstantSpecification_c createConstDataType(Package_c pkg)
 	}
 	private ReturnMessage_c createReturnMessage(Package_c pkg) {
 		CanvasTestUtils.openCanvasEditor(pkg);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Interaction", "Return Message");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1875,7 +1875,7 @@ ConstantSpecification_c createConstDataType(Package_c pkg)
 	}
 	private MenuItem getMenuItem(String parent, String child)
 	{
-		editor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		Menu menu = null;
 		if (child.equals("Parameter") || child.equals("Argument")||child.equals("Attribute")||child.equals("Member")||child.equals("Enumerator")||child.equals("Constant")) {
 			menu = getExplorerView().getTreeViewer().getControl().getMenu();
@@ -1920,7 +1920,7 @@ ${cnat.body}\
 		CorePlugin.getDefault().getPreferenceStore().setValue(
 				BridgePointPreferencesStore.USE_DEFAULT_NAME_FOR_CREATION,
 				false);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Classes", "Imported Class");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1951,7 +1951,7 @@ ${cnat.body}\
 		CorePlugin.getDefault().getPreferenceStore().setValue(
 				BridgePointPreferencesStore.USE_DEFAULT_NAME_FOR_CREATION,
 				false);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Components", "Component Reference");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -1980,7 +1980,7 @@ ${cnat.body}\
 		CorePlugin.getDefault().getPreferenceStore().setValue(
 				BridgePointPreferencesStore.USE_DEFAULT_NAME_FOR_CREATION,
 				true);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		AbstractTool tool = CanvasUtilities.getTool("Default Toolset", "Package");
 		CanvasUtilities.activateTool(tool);
 		boolean convertMouseCoor = true;
@@ -2004,7 +2004,7 @@ ${cnat.body}\
 		Selection.getInstance().setSelection(new StructuredSelection(pkg));
 
 		setNameUsingRenameDialog(200, false, "OK", "Package One");
-		editor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		editor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		
 		MenuItem item =  UITestingUtilities.getMenuItem(editor.getCanvas().getMenu(), "Rename");
 		UITestingUtilities.activateMenuItem(item);
@@ -2044,7 +2044,7 @@ ${cnat.body}\
 		});
 	    
 	    CanvasTestUtils.openDiagramEditor(pkg);
-		GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+		GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 		
 		String[] files = pkg.getFile().getRawLocation().removeLastSegments(1).toFile().list();
         int numberOfFilesBeforeNewElement =files.length;
@@ -2091,7 +2091,7 @@ ${cnat.body}\
 		});
 		
     CanvasTestUtils.openDiagramEditor(pkg);
-	GraphicalEditor activeEditor = ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getGraphicalEditor();
+	GraphicalEditor activeEditor = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()).getActivePart();
 	
 	String[] files = pkg.getFile().getRawLocation().removeLastSegments(1).toFile().list();
     int numberOfFilesBeforeNewElement =files.length;

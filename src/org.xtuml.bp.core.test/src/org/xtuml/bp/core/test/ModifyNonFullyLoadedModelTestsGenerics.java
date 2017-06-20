@@ -34,6 +34,7 @@ import org.xtuml.bp.core.Package_c;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.PersistableModelComponent;
 import org.xtuml.bp.core.common.PersistenceManager;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.ExplorerUtil;
@@ -43,7 +44,6 @@ import org.xtuml.bp.test.common.TransactionListener;
 import org.xtuml.bp.ui.canvas.CanvasTransactionListener;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 @RunWith(OrderedRunner.class)
@@ -196,9 +196,9 @@ public class ModifyNonFullyLoadedModelTestsGenerics extends CanvasTest
             });
 
         CanvasUtilities.openCanvasEditor(otherSS);
-        GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+        GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
         validateOrGenerateResults(ce, generateResults);
 
         listener.WaitForTransactionUnderReview();

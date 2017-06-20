@@ -35,6 +35,7 @@ import org.junit.runner.RunWith;
 import org.xtuml.bp.core.Attribute_c;
 import org.xtuml.bp.core.ModelClass_c;
 import org.xtuml.bp.core.Package_c;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.CombineWithOnO_ATTRAction;
 import org.xtuml.bp.core.ui.CombineWithOnO_ATTRWizardPage1;
 import org.xtuml.bp.core.ui.Selection;
@@ -43,7 +44,6 @@ import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.ui.canvas.Cl_c;
 import org.xtuml.bp.ui.canvas.test.CanvasTest;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 
 @RunWith(OrderedRunner.class)
 public class CombineSplitReferentialsTestGenerics extends CanvasTest {
@@ -354,9 +354,9 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 
 	private void performTest(String test_num) {
 		test_id = test_num;
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		generateResults = true;
 		validateOrGenerateResults(ce, generateResults);
 	}

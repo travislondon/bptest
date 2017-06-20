@@ -83,6 +83,7 @@ import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.common.ModelRoot;
 import org.xtuml.bp.core.common.NonRootModelElement;
 import org.xtuml.bp.core.common.PersistenceManager;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.core.util.UIUtil;
 import org.xtuml.bp.ui.canvas.Cl_c;
@@ -101,7 +102,6 @@ import org.xtuml.bp.ui.graphics.actions.CanvasCopyAction;
 import org.xtuml.bp.ui.graphics.actions.CanvasCutAction;
 import org.xtuml.bp.ui.graphics.actions.CanvasPasteAction;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.ui.graphics.parts.DiagramEditPart;
 import org.xtuml.bp.ui.graphics.parts.GraphicalZoomManager;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
@@ -468,9 +468,9 @@ public class UITestingUtilities {
 	
 	public static boolean ctrlDown = false;
 	public static void createMouseEvent(int x, int y, String eventType) {
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		Event me = new Event();
 		if(ctrlDown) {
 			if(Platform.getOS().equals(Platform.OS_MACOSX)) {

@@ -42,6 +42,7 @@ import org.xtuml.bp.core.common.Transaction;
 import org.xtuml.bp.core.common.TransactionException;
 import org.xtuml.bp.core.common.TransactionManager;
 import org.xtuml.bp.core.ui.Selection;
+import org.xtuml.bp.core.editors.ModelEditor;
 import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.test.common.UITestingUtilities;
@@ -51,7 +52,6 @@ import org.xtuml.bp.ui.canvas.Shape_c;
 import org.xtuml.bp.ui.graphics.actions.CanvasCopyAction;
 import org.xtuml.bp.ui.graphics.actions.CanvasPasteAction;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
-import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
 
 @RunWith(OrderedRunner.class)
@@ -81,9 +81,9 @@ public class CanvasCopyPasteTests extends CanvasTest {
 		Package_c domain = Package_c.getOneEP_PKGOnR1401(m_sys);
 		assertNotNull(domain);
 		CanvasUtilities.openCanvasEditor(domain);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		Package_c dtPackage = Package_c.getOneEP_PKGOnR1405(m_sys, new ClassQueryInterface_c() {
 		
 			public boolean evaluate(Object candidate) {
@@ -96,9 +96,9 @@ public class CanvasCopyPasteTests extends CanvasTest {
 		copySelection(ce);
 		addElementToSelection(true, m_sys);
 		CanvasUtilities.openCanvasEditor(m_sys);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		UITestingUtilities.pasteClipboardContents(UITestingUtilities.getClearPoint(ce), ce);
 		// disabled according to 9505
 		// validateOrGenerateResults(ce, generateResults);
@@ -113,9 +113,9 @@ public class CanvasCopyPasteTests extends CanvasTest {
 		assertNotNull("Package was not created along with paste.", newDtPackage);
 		addElementToSelection(true, newDtPackage);
 		CanvasUtilities.openCanvasEditor(newDtPackage);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
+		ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		test_id = "2";
 		// disabled according to 9505
 		// validateOrGenerateResults(ce, generateResults);
@@ -134,9 +134,9 @@ public class CanvasCopyPasteTests extends CanvasTest {
 		});
 		assertNotNull(subsystem);
 		CanvasUtilities.openCanvasEditor(subsystem);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		ce.getSelectAllAction().run();
 		copySelection(ce);
 		CanvasTestUtilities.doMouseMove(600, 100);
@@ -159,9 +159,9 @@ public class CanvasCopyPasteTests extends CanvasTest {
 		});
 		assertNotNull(subsystem);
 		CanvasUtilities.openCanvasEditor(subsystem);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+		GraphicalEditor ce = (GraphicalEditor) ((ModelEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
+				.getActivePart();
 		ModelClass_c class1 = ModelClass_c.getOneO_OBJOnR8001(PackageableElement_c.getManyPE_PEsOnR8000(subsystem), new ClassQueryInterface_c() {
 		
 			public boolean evaluate(Object candidate) {
