@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ File:      generate.xml
+
+-->
+<project name="als.oal.test" default="" basedir=".">
+	<!-- Configuration -->
+	<import file="${mcj_path}/common.xml"/>
+    <property name="plugins-home" value="${ant.home}/../.."/>
+
+	<!-- Composite targets -->
+	<target name="all" depends="generate_auto_completion_matrix" />
+	<target name="nb_all" depends="generate_auto_completion_matrix" />
+	
+	<!-- Build Targets -->
+	<property name="auto_completion_matrix" value="matrices/generated/auto_completion.txt" />
+		
+	<target name="auto_completion_matrix.depends" >
+		<uptodate property="auto_completion_matrix.buildNotNeeded" targetfile="${auto_completion_matrix}">
+			<srcfiles dir = "arc" includes = "generate_auto_completion_matrix.arc" />
+			<srcfiles dir = "." includes = "generate.xml" />
+			<srcfiles dir = "${mcj_path}/../org.xtuml.bp.core/sql" includes = "ooaofooa.sql" />
+			<srcfiles dir = "../org.xtuml.bp.test" includes = "UnitTestGenerator.pl" />
+			<srcfiles dir = "${mcj_path}" includes = "ooa_schema.sql,arch_utils.inc"/>
+		</uptodate>
+	</target>
+
+	<target name="generate_auto_completion_matrix" unless="auto_completion_matrix.depends">
+		<exec vmlauncher="false" failonerror="true" executable="${xtumlmc_build}" >
+			<env key="mcj_path" value="${mcj_path}" />
+			<env key="PTC_MC_ARC_DIR" value="${mcj_path}"/>
+			<env key="CHAIN_UTIL_DIR" value="${chain_util_path}"/>
+			<env key="GEN_FULL_TESTS" value=""/>
+			<env key="XTUMLMC_HOME" value="${util_bin_dir}/../../" />
+			<arg line="xtumlmc_gen_erate -nopersist
+	          -import ${mcj_path}/ooa_schema.sql
+	          -import ${mcj_path}/../org.xtuml.bp.core/sql/ooaofooa.sql
+	          -arch arc/generate_auto_completion_matrix.arc" />
+		</exec>
+	</target>
+
+	<!-- Clean Targets -->
+
+	<target name="clean_all"
+        description="Clean entire project"
+        depends="clean_classes" >
+
+		<echo>Done cleaning for ${ant.project.name}</echo>
+
+	</target>
+
+	<target name="clean_classes"
+    description="Remove all compiled classes">
+		<echo>Removing all compiled classes ...</echo>
+		<delete verbose="true" dir="bin" />
+	</target>
+
+</project>
