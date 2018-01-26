@@ -803,7 +803,7 @@ public class TestingUtilities {
 
 	public static void importDevelopmentProjectIntoWorkspace(
 			String developmentWorkspaceProject) {
-		String workspace_location = BaseTest.getDevelopmentWorkspaceLocation();
+  	String workspace_location = BaseTest.getDevelopmentWorkspaceLocation();
 		String pathToProject = workspace_location + "/src/" + developmentWorkspaceProject;
 		File file = new File(pathToProject);
 		if(!file.exists()) {

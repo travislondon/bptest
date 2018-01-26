@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="bp.ui.properties.test" default="all" basedir=".">
-	
-  <import file="${mcj_path}/common.xml"/>
 
-  	
+  <property name="mcj_path_tests" value="../../bridgepoint/src/MC-Java" />
+  <import file="${mcj_path_tests}/common.xml"/>
+	
   <target name="all"
           description="Generate UI Properties Test classes"
           depends="java,readonly_test,test_data,format_java">
@@ -18,16 +18,15 @@
 
   <property environment="env"/>
 
-  <property name="root_dir" value="${basedir}" />
-  <property name="core_sql_dir" value="${mcj_path}/../org.xtuml.bp.core/sql" />
-  <property name="chain_util_path" value="${mcj_path}/../org.xtuml.bp.core"/>
+  <property name="core_sql_dir" value="../../bridgepoint/src/org.xtuml.bp.core/sql" />
+  <property name="chain_util_path" value="../../bridgepoint/src/org.xtuml.bp.core"/>
 
   <property name="ooaofooa_schema.output" value="ooaofooa_schema.sql" />
 
   <target name="ooaofooa_schema.depends" >
     <uptodate property="ooaofooa_schema.buildNotNeeded" targetfile="sql/${ooaofooa_schema.output}">
         <srcfiles dir = "${core_sql_dir}" includes = "ooaofooa.sql"/>
-        <srcfiles dir = "${mcj_path}" includes = "schema_gen.arc"/>
+        <srcfiles dir = "${mcj_path_tests}" includes = "schema_gen.arc"/>
     </uptodate>
   </target>
 
@@ -61,10 +60,9 @@
 
   <target name="ooaofooa_schema.relative" if="relative.present" >
     <echo >Generating ${ooaofooa_schema.output} ...</echo>
-	<echo>Ooaofooa schema location: ${core_sql_dir}/ooaofooa.sql</echo>
-  <ant dir="${root_dir}" antfile="${mcj_path}/build.xml" target="generate.schema" >
+  <ant antfile="${mcj_path_tests}/build.xml" target="generate.schema" >
     <property name="param1" value="../${core_sql_dir}/ooaofooa.sql" />
-    <property name="param2" value="${mcj_path}" />
+    <property name="param2" value="${mcj_path_tests}" />
     <property name="param3" value="FALSE" />
     <property name="param4" value="ooaofooa" />
   </ant>
@@ -73,13 +71,13 @@
   <touch file="${ooaofooa_schema.output}" />
   </target>
 
-  <property name="canvas_sql_dir" value="${mcj_path}/../org.xtuml.bp.ui.canvas/sql" />
+  <property name="canvas_sql_dir" value="../../bridgepoint/src/org.xtuml.bp.ui.canvas/sql" />
   <property name="ooaofgraphics_schema.output" value="ooaofgraphics_schema.sql" />
 
   <target name="ooaofgraphics_schema.depends" >
     <uptodate property="ooaofgraphics_schema.buildNotNeeded" targetfile="sql/${ooaofgraphics_schema.output}">
         <srcfiles dir = "${canvas_sql_dir}" includes = "ooaofgraphics.sql"/>
-        <srcfiles dir = "${mcj_path}" includes = "schema_gen.arc"/>
+        <srcfiles dir = "${mcj_path_tests}" includes = "schema_gen.arc"/>
     </uptodate>
   </target>
 
@@ -99,9 +97,9 @@
 
   <target name="ooaofgraphics_schema.absolute" if="absolute.present" >
     <echo >Generating ${ooaofgraphics_schema.output} ...</echo>
-  <ant dir="${root_dir}" antfile="${mcj_path}/build.xml" target="generate.schema" >
-    <property name="param1" value="${canvas_sql_dir}/ooaofgraphics.sql" />
-    <property name="param2" value="${mcj_path}" />
+  <ant antfile="${mcj_path_tests}/build.xml" target="generate.schema" >
+    <property name="param1" value="../${canvas_sql_dir}/ooaofgraphics.sql" />
+    <property name="param2" value="${mcj_path_tests}" />
     <property name="param3" value="FALSE" />
     <property name="param4" value="ooaofgraphics" />
   </ant>
@@ -129,7 +127,7 @@
        <srcfiles dir = "arc"        includes = "create_view_test.arc" />
        <srcfiles dir = "sql"        includes = "proxy_schema.sql,${ooaofooa_schema.output}" />
        <srcfiles dir = "sql"   		includes = "${ooaofgraphics_schema.output}" />
-       <srcfiles dir = "${mcj_path}" includes = "arch_utils.inc"/>
+       <srcfiles dir = "${mcj_path_tests}" includes = "arch_utils.inc"/>
     </uptodate>
   </target>
 
@@ -139,7 +137,7 @@
           unless="java.buildNotNeeded" >
     <echo >Generating Properties Test class ...</echo>
     <exec vmlauncher="false" failonerror="true" executable="${xtumlmc_build}" >
-        <env key="PTC_MC_ARC_DIR" value="${mcj_path}"/>
+        <env key="PTC_MC_ARC_DIR" value="${mcj_path_tests}"/>
         <env key="XTUMLMC_HOME" value="${util_bin_dir}/../../" />
     <arg line="xtumlmc_gen_erate -nopersist
       -import sql/${ooaofooa_schema.output}
@@ -164,7 +162,7 @@
          <srcfiles dir = "arc"        includes = "create_readonly_view_test.arc" />
          <srcfiles dir = "sql"        includes = "${ooaofooa_schema.output}" />
          <srcfiles dir = "sql"   		includes = "${ooaofgraphics_schema.output}" />
-         <srcfiles dir = "${mcj_path}" includes = "arch_utils.inc"/>
+         <srcfiles dir = "${mcj_path_tests}" includes = "arch_utils.inc"/>
       </uptodate>
     </target>
 
@@ -174,7 +172,7 @@
             unless="readonly.buildNotNeeded" >
       <echo >Generating Properties Read Only Test class ...</echo>
       <exec vmlauncher="false" failonerror="true" executable="${xtumlmc_build}" >
-          <env key="PTC_MC_ARC_DIR" value="${mcj_path}"/>
+          <env key="PTC_MC_ARC_DIR" value="${mcj_path_tests}"/>
           <env key="XTUMLMC_HOME" value="${util_bin_dir}/../../" />
       <arg line="xtumlmc_gen_erate -nopersist
         -import sql/${ooaofooa_schema.output}
@@ -207,7 +205,7 @@
             unless="sql.buildNotNeeded" >
       <echo >Generating ${sql.output} ...</echo>
     <copy todir="models/org.xtuml.bp.ui.properties.test/Datatypes/">
-    	<fileset dir="${mcj_path}/../org.xtuml.bp.pkg/globals"><filename name="Globals.xtuml"/></fileset>   	
+    	<fileset dir="../../bridgepoint/src/org.xtuml.bp.pkg/globals"><filename name="Globals.xtuml"/></fileset>   	
     </copy>
     <exec vmlauncher="false" failonerror="true" executable="${xtumlmc_build}" >
       <arg line="xtumlmc_cleanse_for_BridgePoint
@@ -221,7 +219,7 @@
     <uptodate property="test_data.buildNotNeeded" targetfile="src/org/xtuml/bp/ui/properties/test/PropertiesViewTestData.java">
        <srcfiles dir = "sql" includes = "proxy_schema.sql,${sql.output}" />
        <srcfiles dir = "arc"        includes = "create_view_test_data.arc" />
-       <srcfiles dir = "${mcj_path}" includes = "ooa_schema.sql,arch_utils.inc"/>
+       <srcfiles dir = "${mcj_path_tests}" includes = "ooa_schema.sql,arch_utils.inc"/>
     </uptodate>
   </target>
 
@@ -231,7 +229,7 @@
           unless="test_data.buildNotNeeded" >
     <echo >Generating Test Data files ...</echo>
     <exec vmlauncher="false" failonerror="true" executable="${xtumlmc_build}" >
-        <env key="PTC_MC_ARC_DIR" value="${mcj_path}"/>
+        <env key="PTC_MC_ARC_DIR" value="${mcj_path_tests}"/>
         <env key="CHAIN_UTIL_DIR" value="${chain_util_path}"/>
         <env key="XTUMLMC_HOME" value="${util_bin_dir}/../../" />
     <arg line="xtumlmc_gen_erate -nopersist
@@ -260,7 +258,7 @@
         description="Format the generated java source" >
     <taskdef name="PTCodeFormat" classname="PTCodeFormatterTask" >
         <classpath>
-            <pathelement path="${mcj_path}//../org.xtuml.bp.core/tools/" />
+            <pathelement path="../../bridgepoint/src/org.xtuml.bp.core/tools/" />
             <fileset dir="${plugins-home}/plugins" casesensitive="yes">
                 <include name="**/org.eclipse.text_*.jar" />
                 <include name="**/org.eclipse.ui_*.jar" />

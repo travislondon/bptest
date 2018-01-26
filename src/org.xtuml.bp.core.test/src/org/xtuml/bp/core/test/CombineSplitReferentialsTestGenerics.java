@@ -197,7 +197,6 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		performTest("9");
 
 		assertFalse(ref_attr1.Actionfilter("can", "combine"));
-
 	}
 
 	@Test
