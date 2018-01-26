@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Welcome Test Plug-in
 Bundle-SymbolicName: org.xtuml.bp.welcome.test
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.xtuml.bp.welcome.test.TestPlugin
 Bundle-Vendor: xtUML.org
 Bundle-Localization: plugin
@@ -15,5 +15,6 @@ Require-Bundle: org.eclipse.ui,
  org.xtuml.bp.test,
  org.xtuml.bp.ui.explorer,
  org.xtuml.bp.utilities,
- org.eclipse.ui.intro
+ org.eclipse.ui.intro,
+ org.apache.commons.io;bundle-version="2.2.0"
 Eclipse-AutoStart: true

@@ -266,6 +266,7 @@
 
   <property name="cvs_java_files" value="AddRemoveDataItemsTest.java,
     AssignClassTest.java, AssignRemoveEvents.java, AttributeMenuItemTest.java,
+  	AssociationCardinalityMenuTests.java,AssociationTableEditorTests.java,
     CantHappenEvtIgnoreEvtTests.java, CoreTest.java, CoreTestPlugin.java,
     CoreTestResultCreator.java, DeleteAttributesTest.java,
     DerivedAttributeTest.java, GetNameTest.java, NumberingTest.java,
@@ -324,12 +325,11 @@
   	UndoRedoTestGenerics.java,
   	UniqueNameTestGenerics.java,
   	UseCaseTestsGenerics.java,
+  	UIConfigurationTests.java,
   	TestVisibilityInElementChooser.java,
   	MultipleSelectionAssignmentTests.java, 
   	MultipleTargetPasteTests.java,
-  	ImportDuplicatedModelTest,
   	PackageReconciliationTests.java,
-  	ImportDuplicatedModelTest.java,
   	CopyPasteTestGlobals.java,
 	CoreGlobalsTestSuiteIGenerics.java,
 	CoreGlobalsTestSuiteIIGenerics.java,
@@ -446,7 +446,7 @@
     </uptodate>
   </target>
 
-  <target name="java" depends="java.depends" description="Generate the Consistency test outline file" unless="java.buildNotNeeded">
+  <target name="java" depends="java.depends" description="Generate the Consistency test outline file" unless="java.buildNotNeeded" >
     <echo>Generating java files ...</echo>
     <ant antfile="${mcj_path_tests}/build.xml" target="generate.java">
       <property name="param1" value="consistencyTest" />

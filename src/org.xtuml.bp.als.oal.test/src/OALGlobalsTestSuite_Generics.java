@@ -29,7 +29,6 @@ import org.xtuml.bp.als.oal.test.ImplicitComponentAddressTest_Generics;
 import org.xtuml.bp.als.oal.test.OalParserGlobalsTest_Generics;
 import org.xtuml.bp.als.oal.test.OalParserTest_Generics;
 import org.xtuml.bp.als.oal.test.ParseAllInDomain_Generics;
-import org.xtuml.bp.als.oal.test.ParseErrorForEmptySynchronousMessagesTests;
 import org.xtuml.bp.als.oal.test.PolyEventTest;
 import org.xtuml.bp.als.oal.test.RelaxedSameDataTest_Generics;
 import org.xtuml.bp.als.oal.test.SingleDimensionFixedArrayAssigmentTest_0_Generics;
@@ -66,6 +65,7 @@ import org.xtuml.bp.als.oal.test.TestEvent_Generics;
 import org.xtuml.bp.als.oal.test.TestExpr_Generics;
 import org.xtuml.bp.als.oal.test.TestInvocation_Generics;
 import org.xtuml.bp.als.oal.test.TestLineNumbers_Generics;
+import org.xtuml.bp.als.oal.test.TestScopedConstants;
 import org.xtuml.bp.als.oal.test.TestSelectWhere_Generics;
 import org.xtuml.bp.als.oal.test.TestSelectWhere_OpNotAllowed;
 import org.xtuml.bp.als.oal.test.TestSelect_Generics;
@@ -129,9 +129,15 @@ import junit.framework.TestSuite;
 	TestConstant_Generics.class,
 	TestAllowInterfaceNameInICMsg_Generics.class,
 	PolyEventTest.class,
-	ParseErrorForEmptySynchronousMessagesTests.class,
 	SupportConstantsViaIPRTests.class,
+	TestScopedConstants.class
 })
 public class OALGlobalsTestSuite_Generics extends TestSuite {
-
+	/**
+	 * Returns the suite.  This is required to
+	 * use the JUnit Launcher.
+	 */
+	public static Test suite() {
+		return new OALGlobalsTestSuite_Generics();
+	}
 }

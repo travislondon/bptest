@@ -29,6 +29,8 @@ import org.xtuml.bp.core.test.ActionTestGenerics;
 import org.xtuml.bp.core.test.AssignClassTestGenerics;
 import org.xtuml.bp.core.test.AssignComponentTestGenerics;
 import org.xtuml.bp.core.test.AssignRemoveEventsGenerics;
+import org.xtuml.bp.core.test.AssociationCardinalityMenuTests;
+import org.xtuml.bp.core.test.AssociationTableEditorTests;
 import org.xtuml.bp.core.test.AttributeMenuItemTestGenerics;
 import org.xtuml.bp.core.test.CantHappenEvtIgnoreEvtTestsGenerics;
 import org.xtuml.bp.core.test.CoreGlobalsTestSuiteIGenerics;
@@ -40,6 +42,7 @@ import org.xtuml.bp.core.test.DisposeTestGenerics;
 import org.xtuml.bp.core.test.FormalizeUnformalizeTestGenerics;
 import org.xtuml.bp.core.test.GetNameTestGenerics;
 import org.xtuml.bp.core.test.GlobalTestSetupClass;
+import org.xtuml.bp.core.test.ModificationValidationTestsGenerics;
 import org.xtuml.bp.core.test.MultipleReloadGenerics;
 import org.xtuml.bp.core.test.NumberingTestGenerics;
 import org.xtuml.bp.core.test.OperationsTestGenerics;
@@ -48,7 +51,6 @@ import org.xtuml.bp.core.test.RenameTest2Generics;
 import org.xtuml.bp.core.test.RenameTestGenerics;
 import org.xtuml.bp.core.test.SetTypeTestGenerics;
 import org.xtuml.bp.core.test.TigerNatureTestGenerics;
-import org.xtuml.bp.core.test.references.ReferenceResolutionOnLoadTest;
 import org.xtuml.bp.core.util.WorkspaceUtil;
 
 import junit.framework.TestSuite;
@@ -62,6 +64,9 @@ import junit.framework.TestSuite;
 		GlobalTestSetupClass.class,
 		CoreGlobalsTestSuiteIGenerics.class,
 		CoreTestSuiteIGenerics.class,
+		AssociationCardinalityMenuTests.class,
+		ModificationValidationTestsGenerics.class,
+		AssociationTableEditorTests.class,
 		PreferencesTests.class,
 		SetTypeTestGenerics.class,
 		AssignComponentTestGenerics.class,		

@@ -69,7 +69,11 @@ public class WelcomePageTestMetamodel extends TestCase {
 
 	private String[] expectedFiles = expectedXtUMLFiles;
 
-
+	@Override
+	public void setUp() {
+		while(PlatformUI.getWorkbench().getDisplay().readAndDispatch());
+	}
+	
 	public WelcomePageTestMetamodel() {
 		super();
 	}
@@ -79,6 +83,7 @@ public class WelcomePageTestMetamodel extends TestCase {
 		Properties props = new Properties();
 		props.put("model", ProjectName);
 		props.put("SingleFileModel", "true");
+		props.put("LaunchGettingStartedHelp", "false"); // We do not test this and it just spawns lots of windows we do not use in test
 		action.run(null, props);		
 	}
 
@@ -120,7 +125,6 @@ public class WelcomePageTestMetamodel extends TestCase {
 
 	public void raiseWorkbench() {
 		Shell s = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		s.forceActive();
 		s.forceFocus();
 	}
 	@Test

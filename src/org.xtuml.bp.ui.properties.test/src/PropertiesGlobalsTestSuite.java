@@ -29,11 +29,13 @@ import org.xtuml.bp.ui.properties.test.ElementOrderingTest;
 import org.xtuml.bp.ui.properties.test.EnumRangeTest;
 import org.xtuml.bp.ui.properties.test.IsAllowedTypeTest;
 import org.xtuml.bp.ui.properties.test.NumberRangeTest;
+import org.xtuml.bp.ui.properties.test.PropertiesCustomOrderingTests;
 import org.xtuml.bp.ui.properties.test.PropertiesGlobalsTest;
 import org.xtuml.bp.ui.properties.test.PropertiesRenameTests;
 import org.xtuml.bp.ui.properties.test.PropertiesViewTest;
 import org.xtuml.bp.ui.properties.test.PropertiesViewTest2;
 import org.xtuml.bp.ui.properties.test.RefreshTestProp;
+import org.xtuml.bp.ui.properties.test.ScopedConstantDimensionsTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -54,6 +56,8 @@ import junit.framework.TestSuite;
      ElementOrderingTest.class,
      RefreshTestProp.class,
      PropertiesRenameTests.class,
+     PropertiesCustomOrderingTests.class,
+     ScopedConstantDimensionsTest.class
 })
 public class PropertiesGlobalsTestSuite extends TestSuite {
 

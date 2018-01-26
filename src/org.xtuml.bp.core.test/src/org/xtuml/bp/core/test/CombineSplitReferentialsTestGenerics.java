@@ -35,9 +35,11 @@ import org.junit.runner.RunWith;
 import org.xtuml.bp.core.Attribute_c;
 import org.xtuml.bp.core.ModelClass_c;
 import org.xtuml.bp.core.Package_c;
+import org.xtuml.bp.core.common.TransactionManager;
 import org.xtuml.bp.core.ui.CombineWithOnO_ATTRAction;
 import org.xtuml.bp.core.ui.CombineWithOnO_ATTRWizardPage1;
 import org.xtuml.bp.core.ui.Selection;
+import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.CanvasTestUtils;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.ui.canvas.Cl_c;
@@ -101,24 +103,6 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		CanvasTestUtils.openCanvasEditor(uut);
 	}
 	
-//	@Test
-//	public void testCombineSplitReferentialsTest(){
-//		 doTestSelectNonReferentialAttribute();
-//	      doTestClassWithOneReferentialAttribute();
-//	      doTestReferentialAttributesWithDiffBaseTypes();
-//	      doTestTwoReferentialAttributesWithSameBaseTypes();
-//	      doTestSelectCombinedReferentialAttributes();
-//	      doTestTwoReferentialAttributesSameBaseTypesOneDifferent();
-//	      doTestTwoCombinedReferentials();
-//	      doTestThreeReferentials();
-//	      doTestCombineTwoCombinedRefs();
-//	      doTestCombineRefWithIDRef();
-//	      doTestSplitNameLoopGood();
-//	      doTestSplitNameLoopBad();
-//	      doTestSplitPrefixLoopGood();
-//	      doTestSplitPrefixLoopBad();
-//	}
-
 	@Test
 	public void testSelectNonReferentialAttribute() {
 		test_id = "1";
@@ -128,7 +112,7 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 				new ModelClass_by_name_c("testNonRefAttr"));
 		Attribute_c uut = Attribute_c.getOneO_ATTROnR102(mc);
 		assertFalse(uut.Actionfilter("can", "combine"));
-		assertFalse(uut.Actionfilter("can", "split"));
+		assertFalse(uut.Actionfilter("can", "split ref"));
 	}
 
 	@Test
@@ -142,7 +126,7 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		Attribute_c ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
 				new Attribute_by_name_c("attr1"));
 		assertFalse(ref_attr.Actionfilter("can", "combine"));
-		assertFalse(ref_attr.Actionfilter("can", "split"));
+		assertFalse(ref_attr.Actionfilter("can", "split ref"));
 	}
 
 	@Test
@@ -154,8 +138,8 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 				new ModelClass_by_name_c("testRefAttrsDiffBaseType"));
 		Attribute_c ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
 				new Attribute_by_name_c("attr1"));
-		assertFalse(ref_attr.Actionfilter("can", "combine"));
-		assertFalse(ref_attr.Actionfilter("can", "split"));
+		assertTrue(ref_attr.Actionfilter("can", "combine"));
+		assertFalse(ref_attr.Actionfilter("can", "split ref"));
 	}
 
 	@Test
@@ -166,28 +150,10 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		Attribute_c[] ref_attrs = Attribute_c.getManyO_ATTRsOnR102(mc);
 		Attribute_c ref_attr1 = ref_attrs[0];
 		assertTrue(ref_attr1.Actionfilter("can", "combine"));
-		assertFalse(ref_attr1.Actionfilter("can", "split"));
+		assertFalse(ref_attr1.Actionfilter("can", "split ref"));
 
-		Cl_c.Clearselection();
-		selection.addToSelection(ref_attr1);
-
-		Action a = new Action() {
-		};
-		CombineWithOnO_ATTRAction cwooa = new CombineWithOnO_ATTRAction();
-		cwooa.setActivePart(a, PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActivePart());
-		IStructuredSelection structuredSelection = (IStructuredSelection) selection
-				.getSelection();
-		WizardDialog wd = cwooa.O_ATTR_CombineWith(structuredSelection);
-		CombineWithOnO_ATTRWizardPage1 page = (CombineWithOnO_ATTRWizardPage1) wd
-				.getCurrentPage();
-		String[] items = page.Combine_withCombo.getItems();
-		assertEquals(1, items.length);
-		assertEquals("attr1 (R9)", items[0]);
-		page.Combine_withCombo.select(0);
-		IWizard w = page.getWizard();
-		w.performFinish();
-		wd.close();
+		String[] expectedAttrs = {"attr1"};
+		doCombineDialog(ref_attr1, expectedAttrs, 0, true);
 		performTest("4");
 
 	}
@@ -201,28 +167,12 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		Attribute_c[] ref_attrs = Attribute_c.getManyO_ATTRsOnR102(mc);
 		Attribute_c ref_attr1 = ref_attrs[1];
 		assertTrue(ref_attr1.Actionfilter("can", "combine"));
-		assertFalse(ref_attr1.Actionfilter("can", "split"));
+		assertFalse(ref_attr1.Actionfilter("can", "split ref"));
 
-		Cl_c.Clearselection();
-		selection.addToSelection(ref_attr1);
-
-		Action a = new Action() {
-		};
-		CombineWithOnO_ATTRAction cwooa = new CombineWithOnO_ATTRAction();
-		cwooa.setActivePart(a, PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActivePart());
-		IStructuredSelection structuredSelection = (IStructuredSelection) selection
-				.getSelection();
-		WizardDialog wd = cwooa.O_ATTR_CombineWith(structuredSelection);
-		CombineWithOnO_ATTRWizardPage1 page = (CombineWithOnO_ATTRWizardPage1) wd
-				.getCurrentPage();
-		String[] items = page.Combine_withCombo.getItems();
-		assertEquals(1, items.length);
-		assertEquals("attr1 (R11)", items[0]);
-		page.Combine_withCombo.select(0);
-		IWizard w = page.getWizard();
-		w.performCancel();
-		wd.close();
+		// Note that if this fails it is likely due to the attributes being in
+		// a different order in the dialog 
+		String[] expectedAttrs = {"attr2", "attr1"};
+		doCombineDialog(ref_attr1, expectedAttrs, 0, true);
 		performTest("6");
 	}
 
@@ -234,57 +184,19 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		Attribute_c[] ref_attrs = Attribute_c.getManyO_ATTRsOnR102(mc);
 		Attribute_c ref_attr1 = ref_attrs[0];
 		assertTrue(ref_attr1.Actionfilter("can", "combine"));
-		assertFalse(ref_attr1.Actionfilter("can", "split"));
+		assertFalse(ref_attr1.Actionfilter("can", "split ref"));
 
-		Cl_c.Clearselection();
-		selection.addToSelection(ref_attr1);
-
-		Action a = new Action() {
-		};
-		CombineWithOnO_ATTRAction cwooa = new CombineWithOnO_ATTRAction();
-		cwooa.setActivePart(a, PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActivePart());
-		IStructuredSelection structuredSelection = (IStructuredSelection) selection
-				.getSelection();
-		WizardDialog wd = cwooa.O_ATTR_CombineWith(structuredSelection);
-		CombineWithOnO_ATTRWizardPage1 page = (CombineWithOnO_ATTRWizardPage1) wd
-				.getCurrentPage();
-		String[] items = page.Combine_withCombo.getItems();
-		assertEquals(2, items.length);
-		assertEquals("attr1 (R5)", items[0]);
-		assertEquals("attr1 (R20)", items[1]);
-		page.Combine_withCombo.select(0);
-		IWizard w = page.getWizard();
-		w.performFinish();
-		wd.close();
+		String[] expectedAttrs = {"attr1", "attr1"};
+		doCombineDialog(ref_attr1, expectedAttrs, 0, true);
 		performTest("8");
 
 		assertTrue(ref_attr1.Actionfilter("can", "combine"));
-		assertTrue(ref_attr1.Actionfilter("can", "split"));
 
-		Cl_c.Clearselection();
-		selection.addToSelection(ref_attr1);
-
-		a = new Action() {
-		};
-		cwooa = new CombineWithOnO_ATTRAction();
-		cwooa.setActivePart(a, PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActivePart());
-		structuredSelection = (IStructuredSelection) selection.getSelection();
-		wd = cwooa.O_ATTR_CombineWith(structuredSelection);
-		page = (CombineWithOnO_ATTRWizardPage1) wd.getCurrentPage();
-		items = page.Combine_withCombo.getItems();
-		assertEquals(1, items.length);
-		assertEquals("attr1 (R20)", items[0]);
-		page.Combine_withCombo.select(0);
-		w = page.getWizard();
-		w.performFinish();
-
+		String[] expectedAttrs2 = {"attr1"};
+		doCombineDialog(ref_attr1, expectedAttrs2, 0, true);
 		performTest("9");
 
 		assertFalse(ref_attr1.Actionfilter("can", "combine"));
-		assertTrue(ref_attr1.Actionfilter("can", "split"));
-
 	}
 
 	@Test
@@ -295,28 +207,10 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		Attribute_c[] ref_attrs = Attribute_c.getManyO_ATTRsOnR102(mc);
 		Attribute_c ref_attr1 = ref_attrs[0];
 		assertTrue(ref_attr1.Actionfilter("can", "combine"));
-		assertTrue(ref_attr1.Actionfilter("can", "split"));
-
-		Cl_c.Clearselection();
-		selection.addToSelection(ref_attr1);
-
-		Action a = new Action() {
-		};
-		CombineWithOnO_ATTRAction cwooa = new CombineWithOnO_ATTRAction();
-		cwooa.setActivePart(a, PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActivePart());
-		IStructuredSelection structuredSelection = (IStructuredSelection) selection
-				.getSelection();
-		WizardDialog wd = cwooa.O_ATTR_CombineWith(structuredSelection);
-		CombineWithOnO_ATTRWizardPage1 page = (CombineWithOnO_ATTRWizardPage1) wd
-				.getCurrentPage();
-		String[] items = page.Combine_withCombo.getItems();
-		assertEquals(1, items.length);
-		assertEquals("attr2 (R25) (R26)", items[0]);
-		page.Combine_withCombo.select(0);
-		IWizard w = page.getWizard();
-		w.performFinish();
-		wd.close();
+		assertTrue(ref_attr1.Actionfilter("can", "split ref"));
+ 
+		String[] expectedAttrs = {"attr2"};
+		doCombineDialog(ref_attr1, expectedAttrs, 0, true);
 		performTest("12");
 
 	}
@@ -329,10 +223,205 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		Attribute_c[] ref_attrs = Attribute_c.getManyO_ATTRsOnR102(mc);
 		Attribute_c ref_attr2 = ref_attrs[1];
 		assertTrue(ref_attr2.Actionfilter("can", "combine"));
-		assertFalse(ref_attr2.Actionfilter("can", "split"));
+		assertFalse(ref_attr2.Actionfilter("can", "split ref"));
 
+		String[] expectedAttrs = {"attr2"};
+		doCombineDialog(ref_attr2, expectedAttrs, 0, true);
+		performTest("13");
+	}
+
+	@Test
+	public void testCombineBaseIDWithRef() {
+		// Combine base identifier with referential of same type starting with the base. Verify that
+		// non-identifier base attributes are excluded as well as referentials of differing type.
+	    test_id = "14";
+
+		openTestPKGDiagram("brewing");
+		ModelClass_c mc = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("fermentor"));
+		Attribute_c attr_v = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("vessel_id"));
+		String vessel_desc = attr_v.getDescrip();
+		Attribute_c attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("fermentor_id"));
+		String fermentor_desc = attr.getDescrip();
+		assertTrue(attr.Actionfilter("can", "combine"));
+		assertFalse(attr.Actionfilter("can", "split ref"));
+
+		String[] expectedAttrs = {"vessel_id"};
+		doCombineDialog(attr, expectedAttrs, 0, true);
+		
+		// Now that we've combined:
+		// - make sure vessel_id is gone
+		// - make sure the propagated ID fermentor_id was unaffected 
+		//   by checking it's still valid on the conditioning class
+		attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("fermentor_id"));
+		String new_desc = attr.getDescrip();
+		attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("vessel_id"));
+		assertTrue("Combination of fermentation_id and vessel_id failed.",
+				attr == null);
+		ModelClass_c mc2 = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("conditioning"));
+		attr = Attribute_c.getOneO_ATTROnR102(mc2,
+				new Attribute_by_name_c("fermentor_id"));
+		assertTrue("Combination of fermentation_id and vessel_id had undesired fallout.",
+				attr != null);
+		
+		performTest(test_id);
+
+		// Test that descriptions are concatenated
+		String combined_desc = fermentor_desc + "\n\n" + vessel_desc;
+		assertTrue("Failed to combine attribute descriptions.",
+				new_desc.equals(combined_desc) );
+
+		// Undo the combination
+		// undo the paste
+		TransactionManager.getSingleton().getUndoAction().run();
+		BaseTest.dispatchEvents(0);
+		attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("vessel_id"));
+		assertTrue("Undo did not restore original attributes that were combined.",
+				attr != null);
+	}
+
+	@Test
+	public void testCombineRefWithBaseID() {
+		// Combine base identifier with referential of same type starting with the base. Verify that
+		// non-identifier base attributes are excluded as well as referentials of differing type.
+	    test_id = "15";
+
+		openTestPKGDiagram("brewing");
+		ModelClass_c mc = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("fermentor"));
+		Attribute_c attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("vessel_id"));
+		String vessel_desc = attr.getDescrip();
+		Attribute_c attr_f = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("fermentor_id"));
+		String fermentor_desc = attr_f.getDescrip();
+		assertTrue(attr.Actionfilter("can", "combine"));
+		assertFalse(attr.Actionfilter("can", "split ref"));
+
+		String[] expectedAttrs = {"fermentor_id"};
+		doCombineDialog(attr, expectedAttrs, 0, true);
+
+		// Now that we've combined:
+		// - make sure vessel_id is gone
+		// - make sure the propagated ID fermentor_id was unaffected 
+		//   by checking it's still valid on the conditioning class
+		attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("fermentor_id"));
+		String new_desc = attr.getDescrip();
+		attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("vessel_id"));
+		assertTrue("Combination of fermentation_id and vessel_id failed.",
+				attr == null);
+		ModelClass_c mc2 = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("conditioning"));
+		attr = Attribute_c.getOneO_ATTROnR102(mc2,
+				new Attribute_by_name_c("fermentor_id"));
+		assertTrue("Combination of fermentation_id and vessel_id had undesired fallout.",
+				attr != null);
+		
+		performTest(test_id);
+
+		// Test that descriptions are concatenated
+		String combined_desc = fermentor_desc + "\n\n" + vessel_desc;
+		assertTrue("Failed to combine attribute descriptions.",
+				new_desc.equals(combined_desc) );
+
+		// Undo the combination
+		// undo the paste
+		TransactionManager.getSingleton().getUndoAction().run();
+		BaseTest.dispatchEvents(0);
+		attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("vessel_id"));
+		assertTrue("Undo did not restore original attributes that were combined.",
+				attr != null);
+	}
+
+	@Test
+	public void testRefWithNoCombinationPossibilities() {
+		test_id = "16";
+
+		openTestPKGDiagram("brewing");
+		ModelClass_c mc = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("fermentor"));
+		Attribute_c ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("name"));
+		assertFalse(ref_attr.Actionfilter("can", "combine"));
+		assertFalse(ref_attr.Actionfilter("can", "split ref"));
+	}
+
+	@Test
+	public void testBaseWithNoCombinationPossibilities() {
+		test_id = "17";
+
+		openTestPKGDiagram("brewing");
+		ModelClass_c mc = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("fermentor"));
+		Attribute_c ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("label"));
+		assertFalse(ref_attr.Actionfilter("can", "combine"));
+		assertFalse(ref_attr.Actionfilter("can", "split ref"));
+	}
+
+	@Test
+	public void testCantCombineRefsFromSameAssoc() {
+		test_id = "18";
+
+		// Test case where the class only contains two ref attributes and they
+		// both came in via the same assoc (because they are part of the same
+		// identifier in the referred to class). In this case we should not see
+		// combine or split available on the CME on either attribute.
+		openTestPKGDiagram("dog_test");
+		ModelClass_c mc = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("skb"));
+		Attribute_c ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("name"));
+		assertFalse(ref_attr.Actionfilter("can", "combine"));
+		assertFalse(ref_attr.Actionfilter("can", "split ref"));
+		ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("n"));
+		assertFalse(ref_attr.Actionfilter("can", "combine"));
+		assertFalse(ref_attr.Actionfilter("can", "split ref"));
+
+		// Test case where the class contains other attributes in addition to 
+		// the two referentials from the same association.  In this case, we 
+		// should see combine on the cme.  When we activate combine, the list of
+		// combination targets should include the other valid attributes but not
+		// the one from the same association.
+		mc = ModelClass_c.ModelClassInstance(modelRoot,
+				new ModelClass_by_name_c("Dog"));
+		ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("owner_doname"));
+		assertTrue(ref_attr.Actionfilter("can", "combine"));
+		String[] expectedAttrs = {"dog_name", "egb_id"};
+		doCombineDialog(ref_attr, expectedAttrs, 0, false);
+		ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("n"));
+		assertTrue(ref_attr.Actionfilter("can", "combine"));
+		doCombineDialog(ref_attr, expectedAttrs, 0, false);
+		ref_attr = Attribute_c.getOneO_ATTROnR102(mc,
+				new Attribute_by_name_c("egb_id"));
+		assertTrue(ref_attr.Actionfilter("can", "combine"));
+		String[] expectedAttrs3 = {"dog_name", "owner_doname", "n"};
+		doCombineDialog(ref_attr, expectedAttrs3, 0, false);
+	}
+
+	private void performTest(String test_num) {
+		test_id = test_num;
+		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
+				.getGraphicalEditor();
+		validateOrGenerateResults(ce, generateResults);
+	}
+	
+	private void doCombineDialog(Attribute_c attr, String[] expectedAttrs, int selectedItem, boolean doFinish) {
 		Cl_c.Clearselection();
-		selection.addToSelection(ref_attr2);
+		selection.addToSelection(attr);
 
 		Action a = new Action() {
 		};
@@ -345,20 +434,17 @@ public class CombineSplitReferentialsTestGenerics extends CanvasTest {
 		CombineWithOnO_ATTRWizardPage1 page = (CombineWithOnO_ATTRWizardPage1) wd
 				.getCurrentPage();
 		String[] items = page.Combine_withCombo.getItems();
-		assertEquals(1, items.length);
-		assertEquals("attr2 (R27)", items[0]);
-		page.Combine_withCombo.select(0);
+		assertEquals(expectedAttrs.length, items.length);
+		for (int i = 0; i < expectedAttrs.length; ++i) {
+		    assertEquals(expectedAttrs[i], items[i]);
+		}
+		page.Combine_withCombo.select(selectedItem);
 		IWizard w = page.getWizard();
-		w.performFinish();
+		if (doFinish) {
+		    w.performFinish();
+		} else {
+			w.performCancel();
+		}
 		wd.close();
-		performTest("13");
-	}
-
-	private void performTest(String test_num) {
-		test_id = test_num;
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
-		validateOrGenerateResults(ce, generateResults);
 	}
 }

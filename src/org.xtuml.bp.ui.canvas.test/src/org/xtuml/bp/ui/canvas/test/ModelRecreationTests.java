@@ -1,12 +1,4 @@
 //=====================================================================
-//
-//File:      $RCSfile$
-//Version:   $Revision$
-//Modified:  $Date$
-//
-//(c) Copyright 2007-2014 by Mentor Graphics Corp. All rights reserved.
-//
-//=====================================================================
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not 
 // use this file except in compliance with the License.  You may obtain a copy 
 // of the License at
@@ -44,8 +36,6 @@ import org.xtuml.bp.test.common.BaseTest;
 import org.xtuml.bp.test.common.CompareTestUtilities;
 import org.xtuml.bp.test.common.OrderedRunner;
 import org.xtuml.bp.ui.canvas.Ooaofgraphics;
-import org.xtuml.bp.ui.graphics.actions.CanvasCopyAction;
-import org.xtuml.bp.ui.graphics.actions.CanvasPasteAction;
 import org.xtuml.bp.ui.graphics.editor.GraphicalEditor;
 import org.xtuml.bp.ui.graphics.editor.ModelEditor;
 import org.xtuml.bp.utilities.ui.CanvasUtilities;
@@ -66,11 +56,7 @@ public class ModelRecreationTests extends CanvasTest {
 	private SystemModel_c destSys;
 
 	public static File[] getTestModelNames() {
-		String repository_location = System.getenv("XTUML_TEST_MODEL_REPOSITORY");
-		if (repository_location == null || repository_location.equals("")) {
-			// use the default location
-			repository_location = BaseTest.DEFAULT_XTUML_TEST_MODEL_REPOSITORY;
-		}
+		String repository_location = BaseTest.getTestModelRespositoryLocation();
 		
 		File testFolder = new File(repository_location);
 		File[] testModels = testFolder.listFiles(new FileFilter() {
@@ -267,26 +253,6 @@ public class ModelRecreationTests extends CanvasTest {
 			CorePlugin.logError("Unable to create test package", e);
 		}
 		dispatchEvents(0);
-	}
-
-	private void pasteClipboardElements(GraphicalEditor ce) {
-		CanvasTestUtilities.doMouseMove(10, 10);
-		CanvasTestUtilities.doMouseContextPress(10, 10);
-		CanvasPasteAction canvaspasteaction = new CanvasPasteAction(ce);
-		if(ce != null && canvaspasteaction.isEnabled()) {
-			canvaspasteaction.run();
-			waitForTransaction();
-			waitForJobs();
-			waitForDecorator();
-		}
-	}
-
-	private void copySelection(GraphicalEditor ce) {
-		if(!selection.getStructuredSelection().isEmpty()) {
-			CanvasCopyAction canvascopyaction = new CanvasCopyAction(ce);
-			canvascopyaction.run();
-			waitForTransaction();
-		}
 	}
 
 	protected String getResultName() {

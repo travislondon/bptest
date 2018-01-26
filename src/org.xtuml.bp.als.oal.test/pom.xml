@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.xtuml.bp</groupId>
 		<artifactId>org.xtuml.bp.releng.parent.tests</artifactId>
-		<version>6.2.1</version>
+		<version>6.8.1-SNAPSHOT</version>
 		<relativePath>../../bridgepoint/releng/org.xtuml.bp.releng.parent.tests/</relativePath>
 	</parent>
 	<groupId>org.xtuml.bp</groupId>
 	<artifactId>org.xtuml.bp.als.oal.test</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-test-plugin</packaging>
 
 	<build>
@@ -21,11 +21,64 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<testSuite>org.xtuml.bp.als.oal.test</testSuite>
-					<testClass>OALGlobalsTestSuite_Generics</testClass>
-					<argLine>-Xmx1024m -Xms512m -Dorg.eclipse.epp.logging.aeri.ui.skipReports=true -DWORKSPACE_PATH=${basedir} -DLOGFILE_PATH=${project.build.directory}/bp_tests/als.oal/.metadata/.log -Dfile.encoding=UTF-8</argLine>
+					<includes>
+						<include>**/OALGlobalsTestSuite_Generics.java</include>
+						<include>**/OalAutoCompleteTestSuite.java</include>
+					</includes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+
+					<execution>
+						<id>generate-ant</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<property name="compile_classpath" refid="maven.compile.classpath" />
+								<property name="runtime_classpath" refid="maven.runtime.classpath" />
+								<property name="test_classpath" refid="maven.test.classpath" />
+								<property name="plugin_classpath" refid="maven.plugin.classpath" />
+
+								<property name="outputDir" value="${project.build.outputDirectory}" />
+								<property name="sourceDir" value="${project.build.sourceDirectory}" />
+								<property name="ant.home" value="${ant-home-path}" />
+								<property name="eclipse.home" value="${eclipse-home-path}" />
+
+								<ant antfile="${basedir}/generate.xml" target="nb_all" />
+							</tasks>
+						</configuration>
+					</execution>
+					<execution>
+						<id>clean-ant</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<property name="compile_classpath" refid="maven.compile.classpath" />
+								<property name="runtime_classpath" refid="maven.runtime.classpath" />
+								<property name="test_classpath" refid="maven.test.classpath" />
+								<property name="plugin_classpath" refid="maven.plugin.classpath" />
+
+								<property name="outputDir" value="${project.build.outputDirectory}" />
+								<property name="sourceDir" value="${project.build.sourceDirectory}" />
+								<property name="ant.home" value="${ant-home-path}" />
+								<property name="eclipse.home" value="${eclipse-home-path}" />
+
+								<ant antfile="${basedir}/generate.xml" target="clean_all" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
+	
 </project>

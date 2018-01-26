@@ -37,14 +37,12 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Vector;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
@@ -56,7 +54,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.osgi.service.datalocation.Location;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.widgets.Button;
@@ -65,11 +63,12 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
-
 import org.xtuml.bp.core.CorePlugin;
-import org.xtuml.bp.core.Ooaofooa;
 import org.xtuml.bp.core.SystemModel_c;
 import org.xtuml.bp.core.common.IPersistenceHierarchyMetaData;
 import org.xtuml.bp.core.common.NonRootModelElement;
@@ -77,25 +76,27 @@ import org.xtuml.bp.core.common.PersistenceManager;
 import org.xtuml.bp.test.TestUtil;
 import org.xtuml.bp.utilities.ui.ProjectUtilities;
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
 public class TestingUtilities {
 
-	private static IPath sourceDirectory = null;
 	private static boolean archiveFileOptionSet = false; 
+    private static String navigatorView = "org.eclipse.ui.views.ResourceNavigator"; //$NON-NLS-1$
+    private static IViewPart g_view = null;
 
 	public static IPath getSourceDirectory() {
-		if (sourceDirectory == null) {
-			String sourceDirectoryPath = System.getProperty("WORKSPACE_PATH"); //$NON-NLS-1$
-			if (sourceDirectoryPath == null) {
-				throw new IllegalStateException(
-						"environment variable WORKSPACE_PATH not set"); //$NON-NLS-1$
-			}
-			File directory = new File(sourceDirectoryPath);
-			if (!directory.exists() || !directory.isDirectory()) {
-				throw new IllegalStateException(
-						"Invalid source directory given as WORKSPACE_PATH=" + sourceDirectoryPath); //$NON-NLS-1$
-			}
-			sourceDirectory = new Path(sourceDirectoryPath);
+		IPath sourceDirectory = null;
+		String sourceDirectoryPath = System.getProperty("WORKSPACE_PATH"); //$NON-NLS-1$
+		if (sourceDirectoryPath == null) {
+			throw new IllegalStateException("environment variable WORKSPACE_PATH not set"); //$NON-NLS-1$
 		}
+		File directory = new File(sourceDirectoryPath);
+		if (!directory.exists() || !directory.isDirectory()) {
+			throw new IllegalStateException("Invalid source directory given as WORKSPACE_PATH=" + sourceDirectoryPath); //$NON-NLS-1$
+		}
+		sourceDirectory = new Path(sourceDirectoryPath);
+
 		return sourceDirectory;
 	}
 
@@ -127,7 +128,7 @@ public class TestingUtilities {
 	public static boolean deleteProject(String name) throws CoreException {
 		IProject projectHandle = ResourcesPlugin.getWorkspace().getRoot()
 				.getProject(name);
-
+		BaseTest.dispatchEvents(0);
 		return deleteProject(projectHandle);
 	}
 
@@ -748,7 +749,9 @@ public class TestingUtilities {
 	
 	public static boolean importModelUsingWizard(SystemModel_c systemModel,
 			String fullyQualifiedSingleFileModel, boolean parseOnImport) {
-	    return ProjectUtilities.importModelUsingWizard(systemModel, fullyQualifiedSingleFileModel, parseOnImport);
+	     boolean result = ProjectUtilities.importModelUsingWizard(systemModel, fullyQualifiedSingleFileModel, parseOnImport);
+	     BaseTest.dispatchEvents(0);
+	     return result;
 	}
 	
 	public static boolean importModelUsingWizard(SystemModel_c systemModel,
@@ -800,20 +803,24 @@ public class TestingUtilities {
 
 	public static void importDevelopmentProjectIntoWorkspace(
 			String developmentWorkspaceProject) {
-		String workspace_location = "../../bridgepoint";
+  	String workspace_location = BaseTest.getDevelopmentWorkspaceLocation();
 		String pathToProject = workspace_location + "/src/" + developmentWorkspaceProject;
 		File file = new File(pathToProject);
 		if(!file.exists()) {
-			Assert.fail("Could not locate test model at: " + pathToProject);
+			TestCase.fail("Could not locate test model at: " + pathToProject);
 			return;
 		}
-		ProjectUtilities.importExistingProject(pathToProject, true);
-		BaseTest.dispatchEvents(0);
+		importProjectIntoWorkspace(pathToProject);
 	}
 
+	public static void importProjectIntoWorkspace(String rootProjectFolder) {
+		ProjectUtilities.importExistingProjectCLI(rootProjectFolder, true);
+		BaseTest.dispatchEvents();
+	}
+	
 	public static void importTestingProjectIntoWorkspace(String testProject) {
 		String testProjectPath = "";
-		String repository_location = System.getProperty("git_tree_dir");
+		String repository_location = BaseTest.getTestModelRespositoryLocation();
 		if (testProject.equals("GPS Watch")) {
 			// GPS Watch is special. As of completion of DEI 7986, we have one 
 			// version that is used for testing and for distribution in the tool.
@@ -821,19 +828,72 @@ public class TestingUtilities {
 			testProjectPath = repository_location + "/../applications/gps/" + testProject;				
 		} else {
 			testProjectPath = repository_location + "/" + testProject;
-		}
+		} 
 		File file = new File(testProjectPath);
-		ProjectUtilities.importExistingProject(testProjectPath, true);
-		BaseTest.dispatchEvents(0);
+		if(!file.exists()) {
+			if(!file.exists()) {
+				TestCase.fail("Could not locate test model at: " + testProjectPath);
+				return;
+			}
+		}
+		importProjectIntoWorkspace(testProjectPath);
 	}
 
 	public static String getExpectedResultsPath() {
-		String result = "expected_results/";
-		String os = Platform.getOS(); 
-		if (!os.contains("win")) {
-			result = result + os + "/";
-		}
-		return result;
+		return "expected_results/";
 	}
 
+	public static void buildProject(final IProject project) throws Exception {
+	    g_view = selectView(project, navigatorView);
+		g_view.getSite().getSelectionProvider().setSelection(
+				new StructuredSelection(project));
+		Runnable r = new Runnable() {
+			public void run() {
+				try {
+			        project.build(IncrementalProjectBuilder.FULL_BUILD, null);		
+				} catch (Exception e) {
+					CorePlugin.logError(e.getMessage(), e);
+				}
+			}
+		};
+		r.run();
+        
+		allowJobCompletion();
+	}
+	
+	public static IProject getProject(String name) {
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(
+				name);
+		return project;
+	}
+	
+	public static void refreshProject(String projectName) {
+ 		try {
+ 		    final IProject project = getProject(projectName);
+ 		    project.refreshLocal(IProject.DEPTH_INFINITE, null);
+                    allowJobCompletion();
+ 		} catch (CoreException e) {
+ 			CorePlugin.logError(e.getMessage(), e);
+ 		}
+ 	}
+	
+	private static IViewPart selectView(final IProject project, final String viewName) throws Exception {
+		g_view = null;
+		Runnable r = new Runnable() {
+			public void run() {
+				IWorkbenchPage page = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage();
+				try {
+					g_view = page.showView(viewName); //$NON-NLS-1$
+				} catch (PartInitException e) {
+					CorePlugin.logError("Failed to open the " + viewName + " view", e); //$NON-NLS-1$
+				}
+			}
+		};
+		r.run();
+		if ( g_view == null ) {
+		    throw new Exception("Unable to select view: " + viewName);
+		}
+		return g_view;
+	}
 }

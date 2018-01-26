@@ -87,9 +87,6 @@ public class ImportPasteElementsWithIPRTest extends BaseTest {
 
 		TestingUtilities.allowJobCompletion();
 		
-		// TODO - the m_sys2 here is not the same as the m_sys we got earlier and imported into.
-		// But the data we just imported is now connected to m_sys2 and not m_sys.  Don't know if this
-		// is a testing issue or a real problem.
 		m_sys = getSystemModel(project.getName());
 		
 		Package_c pkg = Package_c.getOneEP_PKGOnR1401(m_sys);
@@ -98,63 +95,7 @@ public class ImportPasteElementsWithIPRTest extends BaseTest {
 		assertFalse(imported.getAssignedcomp_id() == Gd_c.Null_unique_id());
 
 	}
-
-	@Test
-	public void testCopyPasteElementWithIPR() {
 		
-		// create new package to paste Component reference in
-		m_sys.Newpackage();
-		setIPRPreference(projectName, false);
-		ModelRoot [] roots = Ooaofooa.getInstancesUnderSystem(projectName);
-		
-		// Copy the component reference
-		ComponentReference_c cpElement = null;
-		for(ModelRoot root : roots) {
-			cpElement = ComponentReference_c.ComponentReferenceInstance(root);
-			if(cpElement != null) {
-				break;
-			}
-		}
-		assertNotNull(cpElement);
-		assertFalse(cpElement.getAssignedcomp_id() == Gd_c.Null_unique_id());
-		
-		
-		// select source and destination packages
-		Package_c[] pkgs = Package_c.getManyEP_PKGsOnR1401(m_sys);
-		Package_c  source = null;
-		Package_c dest = null;
-		for (Package_c packageC : pkgs) {
-			if ( packageC.getName().equals("System")){
-				source = packageC;
-			}
-			else if ( packageC.getName().equals("Unnamed Package")){
-				dest = packageC;
-			}
-		}
-		CanvasUtilities.openCanvasEditor(source);
-		GraphicalEditor ce = ((ModelEditor) PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
-		
-		// copy element
-		UITestingUtilities.copyElement(cpElement, ce);
-
-		CanvasUtilities.openCanvasEditor(dest);
-		ce = ((ModelEditor) PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor())
-				.getGraphicalEditor();
-		TestUtil.yesToDialog(5000);
-		
-		// paste element
-		UITestingUtilities.pasteClipboardContents(new Point(700, 100), ce);
-		
-		// Verification
-		ComponentReference_c pasted = ComponentReference_c.getOneCL_ICOnR8001(PackageableElement_c.getOnePE_PEOnR8000(dest));
-		assertNotNull(pasted);
-		assertFalse(pasted.getAssignedcomp_id() == Gd_c.Null_unique_id());
-			
-	}
-	
     public boolean setIPRPreference(String projectName, boolean bool) {
     	boolean preferenceIPR = false;
     	IProject selectedProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);

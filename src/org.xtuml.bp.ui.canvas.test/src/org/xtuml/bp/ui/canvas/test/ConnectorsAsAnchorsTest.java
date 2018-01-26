@@ -1,12 +1,4 @@
 //========================================================================
-//
-//File:      $RCSfile: ConnectorsAsAnchorsTest.java,v $
-//Version:   $Revision: 1.19 $
-//Modified:  $Date: 2013/05/10 05:41:50 $
-//
-//(c) Copyright 2005-2014 by Mentor Graphics Corp. All rights reserved.
-//
-//========================================================================
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not 
 // use this file except in compliance with the License.  You may obtain a copy 
 // of the License at
@@ -32,11 +24,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xtuml.bp.core.ActorParticipant_c;
 import org.xtuml.bp.core.ClassInstanceParticipant_c;
+import org.xtuml.bp.core.CorePlugin;
 import org.xtuml.bp.core.InteractionParticipant_c;
 import org.xtuml.bp.core.Lifespan_c;
 import org.xtuml.bp.core.Message_c;
 import org.xtuml.bp.core.Package_c;
 import org.xtuml.bp.core.SynchronousMessage_c;
+import org.xtuml.bp.core.common.BridgePointPreferencesStore;
 import org.xtuml.bp.core.common.ClassQueryInterface_c;
 import org.xtuml.bp.core.ui.Selection;
 import org.xtuml.bp.test.common.CanvasTestUtils;
@@ -83,6 +77,8 @@ public class ConnectorsAsAnchorsTest extends CanvasTest {
 		if (firstTest) {
 		    loadProject("TestConnectorsAsAnchors");
 			firstTest = false;
+			CorePlugin.getDefault().getPreferenceStore()
+					.setValue(BridgePointPreferencesStore.USE_DEFAULT_NAME_FOR_CREATION, true);
 		}
 	}
 
@@ -143,117 +139,6 @@ public class ConnectorsAsAnchorsTest extends CanvasTest {
 		validateOrGenerateResults(ce, generateResults);
 
 	}
-
-	/**
-	 * Tests that only the first/last segment of connectors connected at another
-	 * is moved when only one side of the anchor connector is selected
-	 */
-// TODO:    dts0100656082
-/*	public void testMovingConnectorWithConnectorsStartingEndingAtOneSideSelected() {
-		test_id = "2";
-		String diagramName = "SQ D";
-		Sequence_c sequence = getSequence(diagramName);
-		CanvasTestUtils.openCanvasEditor(sequence);
-		GraphicalEditor ce = CanvasTestUtils.getCanvasEditor(diagramName
-				);
-
-		final ClassInstanceParticipant_c cip = ClassInstanceParticipant_c
-				.ClassInstanceParticipantInstance(modelRoot,
-						new ClassQueryInterface_c() {
-
-							public boolean evaluate(Object candidate) {
-								ClassInstanceParticipant_c selected = (ClassInstanceParticipant_c) candidate;
-								return selected.getName().equals("testInstB");
-							}
-
-						});
-
-		GraphicalElement_c ge = GraphicalElement_c.GraphicalElementInstance(
-				graphicsModelRoot, new ClassQueryInterface_c() {
-
-					public boolean evaluate(Object candidate) {
-						GraphicalElement_c selected = (GraphicalElement_c) candidate;
-						return selected.getRepresents() == cip;
-					}
-
-				});
-
-		assertNotNull(ge);
-
-		Shape_c shp = Shape_c.getOneGD_SHPOnR2(ge);
-
-		assertNotNull(shp);
-
-		Point center = CanvasTestUtils.getShapeCenter(shp);
-		center = CanvasTestUtils.convertToMouseCoor(center, ce.getModel());
-
-		// move the shape
-		CanvasTestUtils.doMouseMove(center.x, center.y);
-		CanvasTestUtils.doMousePress(center.x, center.y);
-		CanvasTestUtils.doMouseMove(center.x - 100, center.y);
-		CanvasTestUtils.doMouseRelease(center.x - 100, center.y);
-
-		validateOrGenerateResults(ce, generateResults);
-
-	}
-*/
-	/**
-	 * Tests that all segments of connectors connected at another are moved when
-	 * both sides of the anchor connector are selected
-	 */
-// TODO:    dts0100656082
-	/*public void testMovingConnectorWithConnectorsStartingEndingAtBothSidesSelected() {
-		test_id = "3";
-		String diagramName = "SQ D";
-		Sequence_c sequence = getSequence(diagramName);
-		CanvasTestUtils.openCanvasEditor(sequence);
-		GraphicalEditor ce = CanvasTestUtils.getCanvasEditor(diagramName
-				);
-
-		final ClassInstanceParticipant_c cip = ClassInstanceParticipant_c
-				.ClassInstanceParticipantInstance(modelRoot,
-						new ClassQueryInterface_c() {
-
-							public boolean evaluate(Object candidate) {
-								ClassInstanceParticipant_c selected = (ClassInstanceParticipant_c) candidate;
-								return selected.getName().equals("testInstB");
-							}
-
-						});
-
-		ExternalEntityParticipant_c eep = ExternalEntityParticipant_c
-				.ExternalEntityParticipantInstance(modelRoot);
-
-		GraphicalElement_c ge = GraphicalElement_c.GraphicalElementInstance(
-				graphicsModelRoot, new ClassQueryInterface_c() {
-
-					public boolean evaluate(Object candidate) {
-						GraphicalElement_c selected = (GraphicalElement_c) candidate;
-						return selected.getRepresents() == cip;
-					}
-
-				});
-
-		assertNotNull(ge);
-
-		Shape_c shp = Shape_c.getOneGD_SHPOnR2(ge);
-
-		assertNotNull(shp);
-
-		Point center = CanvasTestUtils.getShapeCenter(shp);
-		center = CanvasTestUtils.convertToMouseCoor(center, ce.getModel());
-
-		// move both sides of a connector
-		CanvasTestUtils.doMouseMove(center.x, center.y);
-		CanvasTestUtils.doMousePress(center.x, center.y);
-		// add the other side to the selection
-		Selection.getInstance().addToSelection(eep);
-		CanvasTestUtils.doMouseMove(center.x + 200, center.y + 200);
-		CanvasTestUtils.doMouseRelease(center.x + 200, center.y + 200);
-
-		validateOrGenerateResults(ce, generateResults);
-
-	}*/
 
 	/**
 	 * Tests that last connector intersected is what the connector is finalized
